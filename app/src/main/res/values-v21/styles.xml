@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-        <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-            <item name="colorPrimary">@color/colorPrimary</item>
-            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-            <item name="colorAccent">@color/colorAccent</item>
-            <item name="android:windowBackground">@color/windowBackground</item>
-            <item name="android:navigationBarColor">@color/black</item>
-            <item name="android:textColorHint">@color/white</item>
-            <item name="android:colorControlNormal">@color/white</item>
-            <item name="android:colorControlActivated">@color/white</item>
-            <item name="android:colorControlHighlight">@color/white</item>
-            <item name="colorControlNormal">@color/white</item>
-            <item name="colorControlActivated">@color/white</item>
-            <item name="colorControlHighlight">@color/white</item>
-        </style>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:colorControlNormal">@color/white</item>
+        <item name="android:colorControlActivated">@color/white</item>
+        <item name="android:colorControlHighlight">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="21">true</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Toolbar Theme / Apply white arrow -->
+        <item name="actionBarTheme">@style/AppTheme.ActionBarTheme</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="21">true</item>
+
+    </style>
+
+    <style name="AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- White arrow -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/drawerArrowColor</item>
+    </style>
 
     <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
         <item name="colorAccent">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
     <style name="Theme.Transparent" parent="AppTheme">
-        <item name="android:colorControlNormal">@color/colorPrimary</item>
-        <item name="android:colorControlActivated">@color/colorPrimary</item>
-        <item name="android:colorControlHighlight">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
@@ -36,6 +59,4 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowActionBar">false</item>
     </style>
-
-
 </resources>
