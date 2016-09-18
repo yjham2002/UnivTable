@@ -11,41 +11,86 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     >
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:src="@drawable/smile"
+            android:layout_marginTop="@dimen/default_margin"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student"
+            android:id="@+id/sName"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_text_large"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student"
+            android:id="@+id/sID"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/week_padding"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_text"
+            />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/oil"
         android:layout_margin="5dp"
         />
-    <android.support.v7.widget.AppCompatButton
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:id="@+id/menu01"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Menu01"
-        android:gravity="left|center"
-        android:padding="10dp"
-        />
-    <android.support.v7.widget.AppCompatButton
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:id="@+id/menu02"
+        android:id="@+id/scrollView2" >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Menu02"
-        android:gravity="left|center"
-        android:padding="10dp"
-        />
-    <android.support.v7.widget.AppCompatButton
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:id="@+id/menu03"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Menu03"
-        android:gravity="left|center"
-        android:padding="10dp"
-        />
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/menu01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Page"
+            android:gravity="left|center"
+            android:padding="10dp"
+            />
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/menu02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="App Info"
+            android:gravity="left|center"
+            android:padding="10dp"
+            />
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/menu03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:gravity="left|center"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>
 

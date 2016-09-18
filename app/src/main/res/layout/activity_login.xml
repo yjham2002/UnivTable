@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="30dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:src="@drawable/logo"
+                android:layout_margin="10dp" />
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:hint="Student ID"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:layout_marginTop="20dp" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pwp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:hint="Password"
+                    android:singleLine="true"
+                    android:inputType="textPassword"
+                    android:layout_marginBottom="20dp"
+                     />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/bt_signin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Login"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
