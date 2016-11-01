@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="알림" >
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notification_push"
+            android:summary="알림을 사용합니다"
+            android:switchTextOff="OFF"
+            android:switchTextOn="ON"
+            android:title="푸시 알림" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="notification_push"
+            android:key="keyword_push"
+            android:summary="자동 출결 정보 알림을 사용합니다"
+            android:title="자동 출결 체크 알림" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="앱 정보" >
+        <PreferenceScreen
+            android:title="앱 버전"
+            android:key="version"
+            android:summary="1.0">
+        </PreferenceScreen>
+        <Preference
+            android:summary="관리자에게 메일을 보냅니다"
+            android:title="메일 보내기" >
+            <intent
+                android:action="android.intent.action.SENDTO"
+                android:data="mailto:yjham2002@gmail.com" />
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

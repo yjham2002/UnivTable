@@ -1,8 +1,8 @@
 package com.dgu.table.univ.univtable;
 
-import android.app.Activity;
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,7 +14,7 @@ import weekview.MonthLoader;
 import weekview.WeekView;
 import weekview.WeekViewEvent;
 
-public class TimetableActivity extends Activity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, View.OnClickListener{
+public class TimetableActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, View.OnClickListener{
 
     private WeekView mWeekView;
 

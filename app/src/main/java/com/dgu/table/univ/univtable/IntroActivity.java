@@ -51,7 +51,7 @@ public class IntroActivity extends AppCompatActivity {
 
     }
 
-    Runnable intro = new Runnable() {
+    private Runnable intro = new Runnable() {
         public void run() {
             Intent i = new Intent(IntroActivity.this, LoginActivity.class);
             startActivity(i);

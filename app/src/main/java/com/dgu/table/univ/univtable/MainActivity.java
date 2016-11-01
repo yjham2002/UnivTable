@@ -1,5 +1,6 @@
 package com.dgu.table.univ.univtable;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Message;
@@ -126,6 +127,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 @Override
                 public void onClick(View v) {
                     mViewPager.notifyHeaderChanged();
+                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                     Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -153,6 +155,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        mDrawerToggle.syncState();
+    }
+
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
@@ -171,9 +179,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 super.onOptionsItemSelected(item);
     }
 
-    public boolean mFlag;
-
-    Handler mHandler = new Handler(){
+    private boolean mFlag;
+    private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             if(msg.what == 0){
