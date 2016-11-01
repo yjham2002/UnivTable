@@ -25,11 +25,13 @@ public class DonggukCrawler extends Crawler{
 
     @Override
     protected String doInBackground(Void... params){
+
         return null;
+
     }
     @Override
     protected void onPostExecute(String result){
-
+        onFinish.callback();
     }
 
 }

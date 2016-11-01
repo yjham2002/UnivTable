@@ -48,6 +48,7 @@ public class fm_2 extends Fragment implements View.OnClickListener{
         return rootView;
     }
 
+    @Override
     public void onClick(View v) {
     }
 }

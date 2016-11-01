@@ -26,7 +26,7 @@ import util.Additional_URL;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
-    private Button _test;
+    private Button _menu1, _menu2, _menu3;
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
@@ -36,7 +36,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v){
         switch (v.getId()){
             case R.id.menu01:
-                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, MypageActivity.class));
+                break;
+            case R.id.menu02:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                break;
+            case R.id.menu03:
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
                 break;
         }
     }
@@ -46,8 +53,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("");
-        _test = (Button)findViewById(R.id.menu01);
-        _test.setOnClickListener(this);
+        _menu1 = (Button)findViewById(R.id.menu01);
+        _menu1.setOnClickListener(this);
+        _menu2 = (Button)findViewById(R.id.menu02);
+        _menu2.setOnClickListener(this);
+        _menu3 = (Button)findViewById(R.id.menu03);
+        _menu3.setOnClickListener(this);
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         toolbar = mViewPager.getToolbar();
 
@@ -95,22 +106,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page) {
-                    case 0:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.oil,
-                                Additional_URL.ImgUrl_1);
-                    case 1:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.green_teal,
-                                Additional_URL.ImgUrl_2);
-                    case 2:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.purple,
-                                Additional_URL.ImgUrl_3);
-                    case 3:
-                        return HeaderDesign.fromColorResAndUrl(
-                                R.color.red,
-                                Additional_URL.ImgUrl_4);
+                    case 0: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_1);
+                    case 1: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_2);
+                    case 2: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_3);
+                    case 3: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_4);
                 }
 
                 //execute others actions if needed (ex : modify your header logo)

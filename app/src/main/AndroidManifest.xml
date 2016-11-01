@@ -27,6 +27,10 @@
         <activity
             android:name=".SettingsActivity"
             android:theme="@style/SimpleBlack" />
+        <activity
+            android:name=".WriteActivity"
+            android:theme="@style/SimpleBlack" />
+        <activity android:name=".MypageActivity"></activity>
     </application>
 
 </manifest>
