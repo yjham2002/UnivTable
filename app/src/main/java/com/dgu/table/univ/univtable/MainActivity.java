@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
@@ -26,7 +27,8 @@ import util.Additional_URL;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
-    private Button _menu1, _menu2, _menu3;
+    private Button _more, _time, _chat, _logout;
+    private ImageView _setting;
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
@@ -35,17 +37,24 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.menu01:
-                startActivity(new Intent(MainActivity.this, MypageActivity.class));
+            case R.id.drawer_setting:
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case R.id.menu02:
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            case R.id.drawer_notice:
+                startActivity(new Intent(this, NoticeActivity.class));
                 break;
-            case R.id.menu03:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+            case R.id.drawer_timetable:
+                break;
+            case R.id.drawer_chat:
+                break;
+            case R.id.drawer_logout:
+                onLogout();
                 break;
         }
+    }
+
+    public void onLogout(){
+
     }
 
     @Override
@@ -53,12 +62,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("");
-        _menu1 = (Button)findViewById(R.id.menu01);
-        _menu1.setOnClickListener(this);
-        _menu2 = (Button)findViewById(R.id.menu02);
-        _menu2.setOnClickListener(this);
-        _menu3 = (Button)findViewById(R.id.menu03);
-        _menu3.setOnClickListener(this);
+
+        _setting = (ImageView)findViewById(R.id.drawer_setting);
+        _setting.setOnClickListener(this);
+        _more = (Button)findViewById(R.id.drawer_notice);
+        _more.setOnClickListener(this);
+        _time = (Button)findViewById(R.id.drawer_timetable);
+        _time.setOnClickListener(this);
+        _chat = (Button)findViewById(R.id.drawer_chat);
+        _chat.setOnClickListener(this);
+        _logout = (Button)findViewById(R.id.drawer_logout);
+        _logout.setOnClickListener(this);
+
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         toolbar = mViewPager.getToolbar();
 

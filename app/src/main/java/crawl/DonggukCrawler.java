@@ -1,18 +1,26 @@
 package crawl;
 
+import com.dgu.table.univ.univtable.ClassInfo;
+
+import java.util.ArrayList;
+
 import util.SFCallback;
 
-public class DonggukCrawler extends Crawler{
+public class DonggukCrawler extends Crawler {
+
+    public ArrayList<ClassInfo> classList = new ArrayList<>();
+
     /**
      * DONGGUK UNIVERSITY
-     * */
+     */
     //ID = "";
     //PW = "";
-    public DonggukCrawler(final String userId, final String userPw, SFCallback onStart, SFCallback onConnect, SFCallback onFinish){
-        URL_AUTH = "https://eclass.dongguk.edu/User.do?cmd=loginUser";
-        URL_TIME = "https://eclass.dongguk.edu/Schedule.do?cmd=viewLessonSchedule";
-        URL_HOME = "https://eclass.dongguk.edu/Main.do?cmd=viewEclassMain";
-        URL_HAND = "https://eclass.dongguk.edu/Report.do?cmd=viewMainReportListLearner";
+    public DonggukCrawler(final String userId, final String userPw, SFCallback onStart, SFCallback onConnect, SFCallback onFinish) {
+        classList.clear();
+        URL_AUTH = "https://eclass.dongguk.edu/User.do?cmd=loginUser"; // Login Link
+        URL_TIME = "https://eclass.dongguk.edu/Schedule.do?cmd=viewLessonSchedule"; // Timetable Link
+        URL_HOME = "https://eclass.dongguk.edu/Main.do?cmd=viewEclassMain"; // Link for retrieving user Name
+        URL_HAND = "https://eclass.dongguk.edu/Report.do?cmd=viewMainReportListLearner"; // Link for retrieving handin list
         FORM_ID = "userDTO.userId";
         FORM_PW = "userDTO.password";
         ID = userId;

@@ -31,22 +31,8 @@ public class fm_1 extends Fragment implements View.OnClickListener{
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView);
 
-        testAdapter.addItem(new ClassInfo("헤더"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
-        testAdapter.addItem(new ClassInfo("디폴트"));
+        testAdapter.addItem(new ClassInfo());
+        testAdapter.addItem(new ClassInfo());
 
         testAdapter.dataChange();
         return rootView;

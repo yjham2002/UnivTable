@@ -1,10 +1,18 @@
 package crawl;
 
 import android.os.AsyncTask;
+
+import com.dgu.table.univ.univtable.ClassInfo;
+
 import org.jsoup.nodes.Document;
+
+import java.util.ArrayList;
+
 import util.SFCallback;
 
 public abstract class Crawler extends AsyncTask<Void, Void, String> {
+
+    protected ArrayList<ClassInfo> classList = new ArrayList<>();
 
     protected Document document;
 

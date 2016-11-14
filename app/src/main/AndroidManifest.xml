@@ -14,7 +14,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroActivity">
+        <activity
+            android:name=".IntroActivity"
+            android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +32,8 @@
         <activity
             android:name=".WriteActivity"
             android:theme="@style/SimpleBlack" />
-        <activity android:name=".MypageActivity"></activity>
+        <activity android:name=".MypageActivity" />
+        <activity android:name=".NoticeActivity"></activity>
     </application>
 
 </manifest>

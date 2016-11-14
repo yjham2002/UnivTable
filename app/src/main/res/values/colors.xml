@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#FFFFFF</color>
     <color name="colorPrimary">#333333</color>
     <color name="colorPrimaryDark">#222222</color>
     <color name="colorPrimaryDark2">#111111</color>
     <color name="colorAccent">#000000</color>
     <color name="windowBackground">#FFFFFF</color>
-    <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="buttonPrimary">#787878</color>
     <color name="accent">#FFFFFF</color>
@@ -21,6 +21,16 @@
     <color name="base">#AAAAAA</color>
     <color name="dark">#474747</color>
     <color name="iron">#EEEEEE</color>
+    <color name="cool">#3f93e4</color>
+    <color name="coral">#2484E8</color>
+    <color name="darkcoral">#1F50B5</color>
+    <color name="orange">#FFBB00</color>
     <color name="transparent_gray">#55000000</color>
     <color name="dayBackground">#05000000</color>
+    <color name="form_bg">#EAEAEA</color>
+    <color name="grayline">#DFDFDF</color>
+    <color name="mint">#9FC93C</color>
+    <color name="menu_bg">#31363A</color>
+    <color name="transparent_white">#55FFFFFF</color>
+    <color name="transparent_window">#AB000000</color>
 </resources>
