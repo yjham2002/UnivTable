@@ -15,11 +15,12 @@ import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 
 import crawl.ClassInfo;
+import crawl.HandInfo;
 
 public class fm_2 extends Fragment implements View.OnClickListener{
 
     public RecyclerView mRecyclerView;
-    public ListViewAdapter testAdapter;
+    public HandListAdapter testAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class fm_2 extends Fragment implements View.OnClickListener{
         View rootView = inflater.inflate(R.layout.fm_2, container, false);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
-        testAdapter = new ListViewAdapter(rootView.getContext(), R.layout.listview_bid);
+        testAdapter = new HandListAdapter(rootView.getContext(), R.layout.listview_bid);
 
         mRecyclerView.setAdapter(new RecyclerViewMaterialAdapter(testAdapter));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
@@ -35,12 +36,12 @@ public class fm_2 extends Fragment implements View.OnClickListener{
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView);
 
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
+        testAdapter.addItem(new HandInfo());
+        testAdapter.addItem(new HandInfo());
+        testAdapter.addItem(new HandInfo());
+        testAdapter.addItem(new HandInfo());
+        testAdapter.addItem(new HandInfo());
+
 
         testAdapter.dataChange();
         return rootView;

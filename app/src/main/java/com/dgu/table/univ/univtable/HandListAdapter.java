@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import crawl.ClassInfo;
+import crawl.HandInfo;
 
 public class HandListAdapter extends RecyclerView.Adapter<HandListAdapter.ViewHolder> {
 
     public static final int HEADER = 3, DEFAULT = 0;
     public Context mContext = null;
-    public List<ClassInfo> mListData = new ArrayList<>();
+    public List<HandInfo> mListData = new ArrayList<>();
     public int item_layout;
 
     public HandListAdapter(Context mContext, int item_layout) {
@@ -51,8 +52,8 @@ public class HandListAdapter extends RecyclerView.Adapter<HandListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        ClassInfo mData = mListData.get(position);
-        holder._subject.setText(mData.title);
+        HandInfo mData = mListData.get(position);
+        holder._subject.setText(mData.name);
         holder.cardview.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,7 @@ public class HandListAdapter extends RecyclerView.Adapter<HandListAdapter.ViewHo
         return position;
     }
 
-    public void addItem(ClassInfo addInfo){
+    public void addItem(HandInfo addInfo){
         mListData.add(addInfo);
     }
     public void dataChange(){

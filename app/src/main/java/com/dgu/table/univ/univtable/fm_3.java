@@ -12,15 +12,13 @@ import android.view.ViewGroup;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 
+import crawl.AttendInfo;
 import crawl.ClassInfo;
 
-/**
- * Created by HP on 2016-11-14.
- */
 public class fm_3 extends Fragment implements View.OnClickListener{
 
     public RecyclerView mRecyclerView;
-    public ListViewAdapter testAdapter;
+    public AttendListAdapter testAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class fm_3 extends Fragment implements View.OnClickListener{
         View rootView = inflater.inflate(R.layout.fm_3, container, false);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
-        testAdapter = new ListViewAdapter(rootView.getContext(), R.layout.listview_bid);
+        testAdapter = new AttendListAdapter(rootView.getContext(), R.layout.listview_bid);
 
         mRecyclerView.setAdapter(new RecyclerViewMaterialAdapter(testAdapter));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
@@ -36,12 +34,15 @@ public class fm_3 extends Fragment implements View.OnClickListener{
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView);
 
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
+        testAdapter.addItem(new AttendInfo());
+        testAdapter.addItem(new AttendInfo());
+        testAdapter.addItem(new AttendInfo());
+        testAdapter.addItem(new AttendInfo());
+        testAdapter.addItem(new AttendInfo());
+        testAdapter.addItem(new AttendInfo());
 
         testAdapter.dataChange();
+
         return rootView;
     }
 

@@ -19,7 +19,7 @@ import crawl.ClassInfo;
 public class fm_4 extends Fragment implements View.OnClickListener{
 
     public RecyclerView mRecyclerView;
-    public ListViewAdapter testAdapter;
+    public ArticleAdapter testAdapter;
     private FloatingActionButton _add;
 
     @Override
@@ -31,7 +31,7 @@ public class fm_4 extends Fragment implements View.OnClickListener{
         _add.setOnClickListener(this);
 
         mRecyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
-        testAdapter = new ListViewAdapter(rootView.getContext(), R.layout.listview_bid);
+        testAdapter = new ArticleAdapter(rootView.getContext(), R.layout.listview_bid);
 
         mRecyclerView.setAdapter(new RecyclerViewMaterialAdapter(testAdapter));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
@@ -39,16 +39,20 @@ public class fm_4 extends Fragment implements View.OnClickListener{
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView);
 
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
+
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+        testAdapter.addItem(new ArticleItem());
+
 
         testAdapter.dataChange();
         return rootView;

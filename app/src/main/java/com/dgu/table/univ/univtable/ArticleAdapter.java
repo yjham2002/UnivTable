@@ -12,16 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import crawl.AttendInfo;
-import crawl.ClassInfo;
 
-public class AttendListAdapter extends RecyclerView.Adapter<AttendListAdapter.ViewHolder> {
+/**
+ * Created by HP on 2016-11-14.
+ */
+public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
 
     public static final int HEADER = 3, DEFAULT = 0;
     public Context mContext = null;
-    public List<AttendInfo> mListData = new ArrayList<>();
+    public List<ArticleItem> mListData = new ArrayList<>();
     public int item_layout;
 
-    public AttendListAdapter(Context mContext, int item_layout) {
+    public ArticleAdapter(Context mContext, int item_layout) {
         super();
         this.mContext = mContext;
         this.item_layout = item_layout;
@@ -52,8 +54,8 @@ public class AttendListAdapter extends RecyclerView.Adapter<AttendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        AttendInfo mData = mListData.get(position);
-        holder._subject.setText(mData.subject);
+        ArticleItem mData = mListData.get(position);
+        holder._subject.setText(mData.content);
         holder.cardview.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +85,7 @@ public class AttendListAdapter extends RecyclerView.Adapter<AttendListAdapter.Vi
         return position;
     }
 
-    public void addItem(AttendInfo addInfo){
+    public void addItem(ArticleItem addInfo){
         mListData.add(addInfo);
     }
     public void dataChange(){
