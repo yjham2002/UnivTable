@@ -15,5 +15,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:layout_margin="18dp"
-        android:src="@mipmap/ic_edit" />
+        android:src="@drawable/icon_edit" />
 </FrameLayout>

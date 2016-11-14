@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import crawl.ClassInfo;
+
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> {
 
     public static final int HEADER = 3, DEFAULT = 0;

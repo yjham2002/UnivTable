@@ -1,4 +1,4 @@
-package com.dgu.table.univ.univtable;
+package crawl;
 
 public class ClassInfo {
     public static final int NULLPTR = -1;

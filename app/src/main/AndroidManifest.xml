@@ -19,7 +19,6 @@
             android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,8 +31,9 @@
         <activity
             android:name=".WriteActivity"
             android:theme="@style/SimpleBlack" />
-        <activity android:name=".MypageActivity" />
-        <activity android:name=".NoticeActivity"></activity>
+        <activity android:name=".NoticeActivity"
+            android:theme="@style/SimpleBlack"
+            ></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,5 @@
 package crawl;
 
-import com.dgu.table.univ.univtable.ClassInfo;
-
-import java.util.ArrayList;
-
 import util.SFCallback;
 
 public class SogangCrawler extends Crawler{

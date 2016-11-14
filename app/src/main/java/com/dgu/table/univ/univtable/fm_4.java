@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+
+import crawl.ClassInfo;
 
 public class fm_4 extends Fragment implements View.OnClickListener{
 

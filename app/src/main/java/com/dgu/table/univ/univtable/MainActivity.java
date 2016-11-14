@@ -1,7 +1,9 @@
 package com.dgu.table.univ.univtable;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -18,17 +20,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 
+import crawl.Crawler;
 import util.Additional_URL;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
+    private SharedPreferences pref;
+    private SharedPreferences.Editor prefEditor;
+
+    private TextView _id, _name, _notice;
     private Button _more, _time, _chat, _logout;
-    private ImageView _setting;
+    private ImageView _setting, _favicon;
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
@@ -44,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(new Intent(this, NoticeActivity.class));
                 break;
             case R.id.drawer_timetable:
+                startActivity(new Intent(this, TimetableActivity.class));
                 break;
             case R.id.drawer_chat:
                 break;
@@ -54,14 +63,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onLogout(){
-
+        finish();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void initView(){
         setTitle("");
+
+        _id = (TextView)findViewById(R.id.sID);
+        _name = (TextView)findViewById(R.id.sName);
+        _notice = (TextView)findViewById(R.id.notice_text);
+
+        _id.setText(pref.getString("id", "Load Failed"));
+        _name.setText(pref.getString("name", "Load Failed"));
 
         _setting = (ImageView)findViewById(R.id.drawer_setting);
         _setting.setOnClickListener(this);
@@ -74,8 +87,40 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         _logout = (Button)findViewById(R.id.drawer_logout);
         _logout.setOnClickListener(this);
 
+        _favicon = (ImageView)findViewById(R.id.favicon);
+
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         toolbar = mViewPager.getToolbar();
+
+    }
+
+    public void setUCODE(final Drawable e){
+        _favicon.setImageDrawable(e);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        pref = getSharedPreferences("Univtable", MODE_PRIVATE);
+        prefEditor = pref.edit();
+
+        initView();
+        switch (pref.getInt("ucode", -1)){
+            case -1:
+                setUCODE(getResources().getDrawable(R.drawable.smile));
+                break;
+            case Crawler.UCODE_DONGGUK:
+                setUCODE(getResources().getDrawable(R.drawable.icon_dongguk));
+                break;
+            case Crawler.UCODE_KOOKMIN:
+                setUCODE(getResources().getDrawable(R.drawable.icon_kookmin));
+                break;
+            case Crawler.UCODE_SOGANG:
+                setUCODE(getResources().getDrawable(R.drawable.icon_sogang));
+                break;
+        }
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
@@ -141,8 +186,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 @Override
                 public void onClick(View v) {
                     mViewPager.notifyHeaderChanged();
-                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                    Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, TimetableActivity.class));
                 }
             });
         }

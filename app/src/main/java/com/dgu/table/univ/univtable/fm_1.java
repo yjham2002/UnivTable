@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 
+import crawl.ClassInfo;
+
 public class fm_1 extends Fragment implements View.OnClickListener{
 
     public RecyclerView mRecyclerView;
