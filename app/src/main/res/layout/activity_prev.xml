@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:background="@color/colorPrimary">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/back"
+            android:scaleType="centerCrop" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatButton
+                android:background="@drawable/button_selector_lime"
+                android:id="@+id/bt_signin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="학교 계정으로 빠르게 로그인"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="95dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:src="@drawable/title"
+                android:layout_margin="10dp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

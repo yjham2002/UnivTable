@@ -14,7 +14,7 @@
         app:viewpager_color="@color/colorPrimary"
         app:viewpager_headerHeight="200dp"
         app:viewpager_headerAlpha="1.0"
-        android:background="@color/grayline"
+        android:background="#EDEDED"
         app:viewpager_pagerTitleStrip="@layout/tab_strip"
         app:viewpager_imageHeaderDarkLayerAlpha="0.2"
         app:viewpager_hideLogoWithFade="true"

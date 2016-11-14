@@ -53,7 +53,7 @@ public class IntroActivity extends AppCompatActivity {
 
     private Runnable intro = new Runnable() {
         public void run() {
-            Intent i = new Intent(IntroActivity.this, LoginActivity.class);
+            Intent i = new Intent(IntroActivity.this, PrevActivity.class);
             startActivity(i);
             finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
