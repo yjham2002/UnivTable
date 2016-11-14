@@ -135,7 +135,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     case 1:
                         return new fm_2();
                     case 2:
-                        return new fm_2();
+                        return new fm_3();
                     case 3:
                         return new fm_4();
                     default:
