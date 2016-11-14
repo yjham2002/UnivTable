@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private TextView _id, _name, _notice;
     private Button _more, _time, _chat, _logout;
-    private ImageView _setting, _favicon;
+    private ImageView _setting, _favicon, _bg;
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
@@ -69,6 +69,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void initView(){
         setTitle("");
 
+        _bg = (ImageView)findViewById(R.id.bg_image);
+
         _id = (TextView)findViewById(R.id.sID);
         _name = (TextView)findViewById(R.id.sName);
         _notice = (TextView)findViewById(R.id.notice_text);
@@ -94,8 +96,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     }
 
-    public void setUCODE(final Drawable e){
-        _favicon.setImageDrawable(e);
+    public void setUCODE(final Drawable bg, final Drawable icon){
+        _bg.setImageDrawable(bg);
+        _favicon.setImageDrawable(icon);
     }
 
     @Override
@@ -109,16 +112,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         initView();
         switch (pref.getInt("ucode", -1)){
             case -1:
-                setUCODE(getResources().getDrawable(R.drawable.smile));
+                setUCODE(null, getResources().getDrawable(R.drawable.smile));
                 break;
             case Crawler.UCODE_DONGGUK:
-                setUCODE(getResources().getDrawable(R.drawable.icon_dongguk));
+                setUCODE(getResources().getDrawable(R.drawable.bg_dongguk), getResources().getDrawable(R.drawable.icon_dongguk));
                 break;
             case Crawler.UCODE_KOOKMIN:
-                setUCODE(getResources().getDrawable(R.drawable.icon_kookmin));
+                setUCODE(getResources().getDrawable(R.drawable.bg_kookmin), getResources().getDrawable(R.drawable.icon_kookmin));
                 break;
             case Crawler.UCODE_SOGANG:
-                setUCODE(getResources().getDrawable(R.drawable.icon_sogang));
+                setUCODE(getResources().getDrawable(R.drawable.bg_sogang), getResources().getDrawable(R.drawable.icon_sogang));
                 break;
         }
 

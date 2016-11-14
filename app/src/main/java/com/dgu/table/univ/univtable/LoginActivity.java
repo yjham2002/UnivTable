@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // on success
         prefEditor.putString("id", "2014112021");
         prefEditor.putString("name", "함의진");
-        prefEditor.putInt("ucode", Crawler.UCODE_SOGANG);
+        prefEditor.putInt("ucode", Crawler.UCODE_DONGGUK);
         prefEditor.commit();
 
         Intent i = new Intent(this, MainActivity.class);

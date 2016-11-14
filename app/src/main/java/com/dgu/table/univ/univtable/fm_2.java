@@ -41,10 +41,6 @@ public class fm_2 extends Fragment implements View.OnClickListener{
         testAdapter.addItem(new ClassInfo());
         testAdapter.addItem(new ClassInfo());
         testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
-        testAdapter.addItem(new ClassInfo());
 
         testAdapter.dataChange();
         return rootView;

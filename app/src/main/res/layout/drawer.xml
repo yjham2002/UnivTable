@@ -67,154 +67,170 @@
 
     </FrameLayout>
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/oil"
-        android:layout_margin="5dp"
-        />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView2" >
-        <LinearLayout
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/bg_image"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <FrameLayout
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatButton
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:text="더보기"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/default_text"
-                    android:id="@+id/drawer_notice"
-                    android:gravity="center"
-                    />
+                android:layout_height="1dp"
+                android:background="@color/transparent"
+                android:layout_margin="5dp"
+                />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollView2" >
                 <LinearLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="15dp"
-                    >
-                    <ImageView
-                        android:layout_width="@dimen/iconSize"
-                        android:layout_height="@dimen/iconSize"
-                        android:src="@drawable/icon_notice"
-                        android:layout_gravity="center"
-                        android:padding="@dimen/default_refresh" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.AppCompatButton
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:text="더보기"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/default_text"
+                            android:id="@+id/drawer_notice"
+                            android:gravity="center"
+                            />
+                        <LinearLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginLeft="15dp"
+                            >
+                            <ImageView
+                                android:layout_width="@dimen/iconSize"
+                                android:layout_height="@dimen/iconSize"
+                                android:src="@drawable/icon_notice"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/default_refresh" />
+                            <TextView
+                                android:textColor="@color/white"
+                                android:text="공지사항"
+                                android:padding="10dp"
+                                android:textSize="@dimen/menu_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </FrameLayout>
+
                     <TextView
-                        android:textColor="@color/white"
-                        android:text="공지사항"
-                        android:padding="10dp"
-                        android:textSize="@dimen/menu_text"
+                        android:id="@+id/notice_text"
+                        android:textSize="@dimen/default_text"
+                        android:text="공지사항이 없습니다."
+                        android:layout_marginLeft="60dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/transparent_white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/transparent_white"
+                        android:layout_margin="5dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:src="@drawable/icon_attend"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/default_refresh" />
+                        <android.support.v7.widget.AppCompatButton
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="주간시간표"
+                            android:textSize="@dimen/menu_text"
+                            android:textColor="@color/white"
+                            android:id="@+id/drawer_timetable"
+                            android:gravity="left|center"
+                            android:padding="10dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:src="@drawable/icon_comment_m"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/default_refresh" />
+                        <android.support.v7.widget.AppCompatButton
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="대화"
+                            android:textSize="@dimen/menu_text"
+                            android:textColor="@color/white"
+                            android:id="@+id/drawer_chat"
+                            android:gravity="left|center"
+                            android:padding="10dp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/transparent_white"
+                        android:layout_margin="5dp"
+                        />
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:src="@drawable/icon_logout"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/default_refresh" />
+                        <android.support.v7.widget.AppCompatButton
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="로그아웃"
+                            android:textSize="@dimen/menu_text"
+                            android:textColor="@color/white"
+                            android:id="@+id/drawer_logout"
+                            android:gravity="left|center"
+                            android:padding="10dp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/transparent_white"
+                        android:layout_margin="5dp"
+                        />
                 </LinearLayout>
-            </FrameLayout>
+            </ScrollView>
 
-            <TextView
-                android:id="@+id/notice_text"
-                android:textSize="@dimen/default_text"
-                android:text="공지사항이 없습니다."
-                android:layout_marginLeft="60dp"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/monsoon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/oil"
-                android:layout_margin="5dp"
-                />
-
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="15dp"
-                >
-                <ImageView
-                    android:layout_width="@dimen/iconSize"
-                    android:layout_height="@dimen/iconSize"
-                    android:src="@drawable/icon_attend"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/default_refresh" />
-                <android.support.v7.widget.AppCompatButton
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="주간시간표"
-                    android:textSize="@dimen/menu_text"
-                    android:textColor="@color/white"
-                    android:id="@+id/drawer_timetable"
-                    android:gravity="left|center"
-                    android:padding="10dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="15dp"
-                >
-                <ImageView
-                    android:layout_width="@dimen/iconSize"
-                    android:layout_height="@dimen/iconSize"
-                    android:src="@drawable/icon_comment_m"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/default_refresh" />
-                <android.support.v7.widget.AppCompatButton
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="대화"
-                    android:textSize="@dimen/menu_text"
-                    android:textColor="@color/white"
-                    android:id="@+id/drawer_chat"
-                    android:gravity="left|center"
-                    android:padding="10dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/oil"
-                android:layout_margin="5dp"
-                />
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="15dp"
-                >
-                <ImageView
-                    android:layout_width="@dimen/iconSize"
-                    android:layout_height="@dimen/iconSize"
-                    android:src="@drawable/icon_logout"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/default_refresh" />
-                <android.support.v7.widget.AppCompatButton
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="로그아웃"
-                    android:textSize="@dimen/menu_text"
-                    android:textColor="@color/white"
-                    android:id="@+id/drawer_logout"
-                    android:gravity="left|center"
-                    android:padding="10dp" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/oil"
-                android:layout_margin="5dp"
-                />
         </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
+
 
 
 </LinearLayout>
