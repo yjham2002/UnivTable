@@ -1,5 +1,6 @@
 # UnivTable
 - An android app for undergraduates providing lecture schedule with university account automatically
+* 본 프로젝트는 동국대학교 컴퓨터공학전공 소프트웨어공학 개론의 Agile-Process를 통해 진행되었습니다.
 
 ## Functions
 - Automatic Lecture Schedule Loader
@@ -11,6 +12,7 @@
 - Dongguk University(Under Developing)
 - Sogang University(Under Developing)
 - Kookmin University(Under Developing)
+
 ##### Various universities will be added continuously.
 
 ## Developers

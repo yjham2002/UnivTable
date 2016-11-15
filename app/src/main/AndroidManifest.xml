@@ -48,7 +48,8 @@
         <activity
             android:name=".NoticeActivity"
             android:theme="@style/SimpleBlack" />
-        <activity android:name=".PrevActivity"></activity>
+        <activity android:name=".PrevActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
