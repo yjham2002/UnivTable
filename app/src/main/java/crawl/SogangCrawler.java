@@ -1,6 +1,6 @@
 package crawl;
 
-import util.SFCallback;
+import android.os.Handler;
 
 public class SogangCrawler extends Crawler{
 
@@ -9,7 +9,7 @@ public class SogangCrawler extends Crawler{
      * */
     //ID = "20131014";
     //PW = "wjsgytjd5+";
-    public SogangCrawler(final String userId, final String userPw, SFCallback onStart, SFCallback onConnect, SFCallback onFinish){
+    public SogangCrawler(final String userId, final String userPw){
         classList.clear();
         URL_AUTH = "https://eclass.sogang.ac.kr/ilos/lo/login.acl";
         URL_TIME = "http://eclass.sogang.ac.kr/ilos/st/main/pop_academic_timetable_form.acl";
@@ -19,18 +19,15 @@ public class SogangCrawler extends Crawler{
         FORM_PW = "usr_pwd";
         ID = userId;
         PW = userPw;
-        this.onStart = onStart;
-        this.onConnect = onConnect;
-        this.onFinish = onFinish;
-        this.onFail = onFail;
     }
 
     @Override
-    protected String doInBackground(Void... params){
-        return null;
-    }
-    @Override
-    protected void onPostExecute(String result){
+    public void getDailyTime(){
 
     }
+    @Override
+    public void getTimetable(){
+
+    }
+
 }

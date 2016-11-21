@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +19,15 @@ import android.widget.Toast;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import crawl.Crawler;
 import crawl.DonggukCrawler;
+import crawl.KookminCrawler;
 import crawl.SogangCrawler;
-import util.SFCallback;
-import util.WeatherParser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Crawler crawler;
+    private String geocode = "서울";
 
     private ArrayList<UnivItem> spinList = new ArrayList<>();
     private SpinnerAdapter sAdapter;
@@ -58,14 +59,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         pdial.setCancelable(false);
         pdial.show();
 
-        String geocode = "서울";
-
         _login.setEnabled(false);
 
         final UnivItem mData = spinList.get(_spinner.getSelectedItemPosition());
 
         switch (mData.ucode){
             case Crawler.UCODE_DONGGUK:
+                crawler = new DonggukCrawler(id, pw);
                 geocode = Crawler.GEO_SEOUL;
                 if(id.length() != Crawler.LENGTH_DONGGUK) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_DONGGUK + "자리 학번을 사용합니다");
@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case Crawler.UCODE_DONGGUK_GY:
+                crawler = new DonggukCrawler(id, pw);
                 geocode = Crawler.GEO_GYEONGJU;
                 if(id.length() != Crawler.LENGTH_DONGGUK) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_DONGGUK + "자리 학번을 사용합니다");
@@ -84,6 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case Crawler.UCODE_DONGGUK_IL:
+                crawler = new DonggukCrawler(id, pw);
                 geocode = Crawler.GEO_ILSAN;
                 if(id.length() != Crawler.LENGTH_DONGGUK) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_DONGGUK + "자리 학번을 사용합니다");
@@ -94,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case Crawler.UCODE_SOGANG:
                 geocode = Crawler.GEO_SEOUL;
+                crawler = new SogangCrawler(id, pw);
                 if(id.length() != Crawler.LENGTH_SOGANG) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_SOGANG + "자리 학번을 사용합니다");
                     _login.setEnabled(true);
@@ -102,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case Crawler.UCODE_KOOKMIN:
+                crawler = new KookminCrawler(id, pw);
                 geocode = Crawler.GEO_SEOUL;
                 if(id.length() != Crawler.LENGTH_KOOKMIN) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_KOOKMIN + "자리 학번을 사용합니다");
@@ -122,20 +126,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        // on success
-        prefEditor.putString("id", "2014112021");
-        prefEditor.putString("name", "함의진");
-        prefEditor.putInt("ucode", spinList.get(_spinner.getSelectedItemPosition()).ucode);
-        prefEditor.commit();
-
-        WeatherParser.getWeather(geocode, new Handler(){
+        crawler.verify(new Handler(){
             @Override
             public void handleMessage(Message msg){
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-                pdial.dismiss();
-                _login.setEnabled(true);
-                finish();
+                Log.e("Handle", msg.getData().toString());
+                if(msg.getData().getBoolean("result")){
+                    prefEditor.putString("geocode", geocode);
+                    prefEditor.putString("id", msg.getData().getString("id"));
+                    prefEditor.putString("name", msg.getData().getString("name"));
+                    prefEditor.putInt("ucode", spinList.get(_spinner.getSelectedItemPosition()).ucode);
+                    prefEditor.commit();
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(i);
+                    pdial.dismiss();
+                    _login.setEnabled(true);
+                    finish();
+                }else{
+                    showToast("로그인할 수 없습니다");
+                    _login.setEnabled(true);
+                    pdial.dismiss();
+                    return;
+                }
             }
         });
 

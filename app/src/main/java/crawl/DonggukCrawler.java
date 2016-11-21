@@ -1,8 +1,16 @@
 package crawl;
 
-import java.util.ArrayList;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
-import util.SFCallback;
+import org.json.JSONException;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class DonggukCrawler extends Crawler {
 
@@ -13,7 +21,7 @@ public class DonggukCrawler extends Crawler {
      */
     //ID = "";
     //PW = "";
-    public DonggukCrawler(final String userId, final String userPw, SFCallback onStart, SFCallback onConnect, SFCallback onFinish) {
+    public DonggukCrawler(final String userId, final String userPw) {
         classList.clear();
         URL_AUTH = "https://eclass.dongguk.edu/User.do?cmd=loginUser"; // Login Link
         URL_TIME = "https://eclass.dongguk.edu/Schedule.do?cmd=viewLessonSchedule"; // Timetable Link
@@ -23,21 +31,16 @@ public class DonggukCrawler extends Crawler {
         FORM_PW = "userDTO.password";
         ID = userId;
         PW = userPw;
-        this.onStart = onStart;
-        this.onConnect = onConnect;
-        this.onFinish = onFinish;
-        this.onFail = onFail;
+        CSS = "SPAN>strong";
     }
 
     @Override
-    protected String doInBackground(Void... params){
-
-        return null;
+    public void getDailyTime(){
 
     }
     @Override
-    protected void onPostExecute(String result){
-        onFinish.callback();
+    public void getTimetable(){
+
     }
 
 }

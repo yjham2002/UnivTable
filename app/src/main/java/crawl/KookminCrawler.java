@@ -1,8 +1,15 @@
 package crawl;
 
-import java.util.ArrayList;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
-import util.SFCallback;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class KookminCrawler extends Crawler{
 
@@ -13,7 +20,7 @@ public class KookminCrawler extends Crawler{
      * */
     //ID = "20145160";
     //PW = "qkrtkddl2#";
-    public KookminCrawler(final String userId, final String userPw, SFCallback onStart, SFCallback onConnect, SFCallback onFinish, SFCallback onFail){
+    public KookminCrawler(final String userId, final String userPw){
         classList.clear();
         URL_AUTH = "http://ktis.kookmin.ac.kr/kmu/com.Login.do?";
         URL_TIME = "http://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do";
@@ -23,18 +30,15 @@ public class KookminCrawler extends Crawler{
         FORM_PW = "txt_passwd";
         ID = userId;
         PW = userPw;
-        this.onStart = onStart;
-        this.onConnect = onConnect;
-        this.onFinish = onFinish;
-        this.onFail = onFail;
     }
 
     @Override
-    protected String doInBackground(Void... params){
-        return null;
-    }
-    @Override
-    protected void onPostExecute(String result){
+    public void getDailyTime(){
 
     }
+    @Override
+    public void getTimetable(){
+
+    }
+
 }
