@@ -3,6 +3,7 @@ package crawl;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -66,6 +67,7 @@ public abstract class Crawler {
                             .cookies(res.cookies())
                             .timeout(TIMEOUT)
                             .get();
+                    Log.e("Handle", document.html());
                     Element getUser = document.select(CSS).first();
                     if(getUser == null) {
                         result = false;
