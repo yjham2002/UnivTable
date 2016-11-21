@@ -1,5 +1,6 @@
 package com.dgu.table.univ.univtable;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import crawl.Crawler;
 import util.Additional_URL;
@@ -63,6 +65,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onLogout(){
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
@@ -102,6 +105,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -114,7 +122,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case -1:
                 setUCODE(null, getResources().getDrawable(R.drawable.smile));
                 break;
-            case Crawler.UCODE_DONGGUK:
+            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_GY: case Crawler.UCODE_DONGGUK_IL:
                 setUCODE(getResources().getDrawable(R.drawable.bg_dongguk), getResources().getDrawable(R.drawable.icon_dongguk));
                 break;
             case Crawler.UCODE_KOOKMIN:

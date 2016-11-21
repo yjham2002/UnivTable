@@ -1,5 +1,6 @@
 package com.dgu.table.univ.univtable;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -20,12 +21,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.tsengvn.typekit.TypekitContextWrapper;
+
 public class SettingsActivity extends PreferenceActivity {
 
     public String appVersion() throws PackageManager.NameNotFoundException {
         PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         String version = pInfo.versionName;
         return version;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
     @Override

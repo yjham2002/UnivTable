@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal|top"
         android:src="@drawable/back"
+        android:id="@+id/mainBg"
         android:scaleType="centerCrop" />
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="30dp"
             android:paddingLeft="24dp"
             android:paddingRight="24dp">
 
@@ -33,6 +33,11 @@
                 android:layout_gravity="center"
                 android:src="@drawable/title"
                 android:layout_margin="10dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner" />
 
                 <EditText
                     android:layout_width="match_parent"

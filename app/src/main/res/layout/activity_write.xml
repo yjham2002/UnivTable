@@ -55,6 +55,8 @@
     <EditText
         android:layout_margin="10dp"
         android:layout_width="match_parent"
+        android:hint="내용을 입력하세요"
+        android:textColorHint="@color/grayline"
         android:layout_height="wrap_content"
         android:id="@+id/tbox"
         android:gravity="top"

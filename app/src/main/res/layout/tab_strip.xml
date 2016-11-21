@@ -12,6 +12,6 @@
     app:pstsShouldExpand="true"
     app:pstsTabPaddingLeftRight="10dp"
     app:pstsTabTextAllCaps="true"
-    app:pstsTabTextSize="17dp"
+    app:pstsTabTextSize="15dp"
     tools:background="#A333"
     />

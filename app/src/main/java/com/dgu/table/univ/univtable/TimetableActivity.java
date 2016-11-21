@@ -1,10 +1,13 @@
 package com.dgu.table.univ.univtable;
 
+import android.content.Context;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +27,12 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
             default: break;
         }
     }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
         Toast.makeText(getApplicationContext(), event.getRawTime(), Toast.LENGTH_LONG).show();
