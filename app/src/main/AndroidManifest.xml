@@ -50,7 +50,9 @@
             android:name=".NoticeActivity"
             android:theme="@style/SimpleBlack" />
         <activity android:name=".PrevActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity"
+            android:theme="@style/SimpleBlack"
+            ></activity>
     </application>
 
 </manifest>

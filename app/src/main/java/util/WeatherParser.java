@@ -58,6 +58,7 @@ public class WeatherParser{
                     Log.e("Weather", weatherInfo);
                     Log.e("Weather", IURL);
                 }catch (IOException e){
+                    weatherInfo = "날씨 정보를 불러오는 중 오류가 발생했습니다";
                     isFailed = true;
                 }
                 Message msg = mHandler.obtainMessage();
