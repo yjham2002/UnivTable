@@ -66,6 +66,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onLogout(){
+        prefEditor.putBoolean("auto", false);
+        prefEditor.putString("id", "#");
+        prefEditor.putString("pw", "#");
+        prefEditor.putString("name", "#");
+        prefEditor.commit();
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }

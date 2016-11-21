@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 public class IntroActivity extends AppCompatActivity {
 
-    private SharedPreferences prefs;
+    private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
     private Handler h;
     private int delayTime = 1000;
@@ -22,8 +22,8 @@ public class IntroActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        prefs = getSharedPreferences("UnivTable", MODE_PRIVATE);
-        prefEditor = prefs.edit();
+        pref = getSharedPreferences("Univtable", MODE_PRIVATE);
+        prefEditor = pref.edit();
 
         iv = (ImageView)findViewById(R.id.imageView);
         iv.setDrawingCacheEnabled(true);
@@ -53,10 +53,18 @@ public class IntroActivity extends AppCompatActivity {
 
     private Runnable intro = new Runnable() {
         public void run() {
-            Intent i = new Intent(IntroActivity.this, PrevActivity.class);
-            startActivity(i);
-            finish();
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            if(pref.getBoolean("auto", false)){
+                Intent i = new Intent(IntroActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }else{
+                Intent i = new Intent(IntroActivity.this, PrevActivity.class);
+                startActivity(i);
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+
         }
     };
 

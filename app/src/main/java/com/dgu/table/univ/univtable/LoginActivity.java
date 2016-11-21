@@ -131,8 +131,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void handleMessage(Message msg){
                 Log.e("Handle", msg.getData().toString());
                 if(msg.getData().getBoolean("result")){
+                    prefEditor.putBoolean("auto", true);
                     prefEditor.putString("geocode", geocode);
+                    prefEditor.putInt("selection", _spinner.getSelectedItemPosition());
                     prefEditor.putString("id", msg.getData().getString("id"));
+                    prefEditor.putString("pw", msg.getData().getString("pw"));
                     prefEditor.putString("name", msg.getData().getString("name"));
                     prefEditor.putInt("ucode", spinList.get(_spinner.getSelectedItemPosition()).ucode);
                     prefEditor.commit();
@@ -142,6 +145,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     _login.setEnabled(true);
                     finish();
                 }else{
+                    prefEditor.putBoolean("auto", false);
+                    prefEditor.putString("id", "#");
+                    prefEditor.putString("pw", "#");
+                    prefEditor.putString("name", "#");
+                    prefEditor.commit();
                     showToast("로그인에 실패하였습니다");
                     _login.setEnabled(true);
                     pdial.dismiss();
@@ -189,6 +197,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         prefEditor = pref.edit();
 
         initView();
+
+        if(pref.getBoolean("auto", false)){
+            _spinner.setSelection(pref.getInt("selection", 0));
+            signIn(pref.getString("id", "#"), pref.getString("pw", "#"));
+        }
     }
 
     public class PasswordTransfromMethod extends PasswordTransformationMethod {

@@ -67,7 +67,6 @@ public abstract class Crawler {
                             .cookies(res.cookies())
                             .timeout(TIMEOUT)
                             .get();
-                    Log.e("Handle", document.html());
                     Element getUser = document.select(CSS).first();
                     if(getUser == null) {
                         result = false;
@@ -84,6 +83,7 @@ public abstract class Crawler {
 
                 bundle.putBoolean("result", result);
                 bundle.putString("id", ID);
+                bundle.putString("pw", PW);
                 bundle.putString("name", userName);
 
                 msg.setData(bundle);
