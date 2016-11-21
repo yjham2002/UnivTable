@@ -12,6 +12,8 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
+import crawl.Crawler;
+
 public class WeatherParser{
 
     private static String URL = "http://www.weatheri.co.kr/forecast/forecast01.php?rid=1301040101&k=10&a_name=";
@@ -30,10 +32,24 @@ public class WeatherParser{
     public WeatherParser(){}
 
     public static void getWeather(final String geocode, final Handler mHandler) {
+        switch (geocode){
+            case Crawler.GEO_SEOUL:
+                URL = "http://www.weatheri.co.kr/forecast/forecast01.php?rid=0101010000&k=1&a_name=%BC%AD%BF%EF";
+                break;
+            case Crawler.GEO_ILSAN:
+                URL = "http://www.weatheri.co.kr/forecast/forecast01.php?rid=0202020102&k=1&a_name=%B0%ED%BE%E7";
+                break;
+            case Crawler.GEO_GYEONGJU:
+                URL = "http://www.weatheri.co.kr/forecast/forecast01.php?rid=1002030102&k=8&a_name=%B0%E6%C1%D6";
+                break;
+            default:
+                URL = "http://www.weatheri.co.kr/forecast/forecast01.php?rid=0101010000&k=1&a_name=%BC%AD%BF%EF";
+                break;
+        }
         Thread t = new Thread() {
             public void run() {
                 try {
-                    Document document = Jsoup.connect("http://www.weatheri.co.kr/forecast/forecast01.php?rid=1301040101&k=10&a_name=" + geocode).get();
+                    Document document = Jsoup.connect(URL).get();
                     Element weather = document.select("tr>td").get(THRESHOLD);
                     Element imageUrl = document.select("tbody>tr>td[rowspan=4]>img").first();
                     IURL = imageUrl.attr("src");

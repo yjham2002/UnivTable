@@ -10,6 +10,10 @@ import util.SFCallback;
 
 public abstract class Crawler extends AsyncTask<Void, Void, String> {
 
+    public static final String GEO_SEOUL = "서울";
+    public static final String GEO_ILSAN = "일산";
+    public static final String GEO_GYEONGJU = "경주";
+
     public static final int UCODE_DONGGUK = 1;
     public static final int UCODE_KOOKMIN = 4;
     public static final int UCODE_SOGANG = 3;

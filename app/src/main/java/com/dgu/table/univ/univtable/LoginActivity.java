@@ -53,63 +53,88 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void signIn(String id, String pw){
+        final ProgressDialog pdial = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        pdial.setMessage("로그인하는 중...");
+        pdial.setCancelable(false);
+        pdial.show();
+
+        String geocode = "서울";
+
+        _login.setEnabled(false);
+
         final UnivItem mData = spinList.get(_spinner.getSelectedItemPosition());
 
         switch (mData.ucode){
-            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_IL: case Crawler.UCODE_DONGGUK_GY:
+            case Crawler.UCODE_DONGGUK:
+                geocode = Crawler.GEO_SEOUL;
                 if(id.length() != Crawler.LENGTH_DONGGUK) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_DONGGUK + "자리 학번을 사용합니다");
+                    _login.setEnabled(true);
+                    pdial.dismiss();
+                    return;
+                }
+                break;
+            case Crawler.UCODE_DONGGUK_GY:
+                geocode = Crawler.GEO_GYEONGJU;
+                if(id.length() != Crawler.LENGTH_DONGGUK) {
+                    showToast( mData.uname + "는 " + Crawler.LENGTH_DONGGUK + "자리 학번을 사용합니다");
+                    _login.setEnabled(true);
+                    pdial.dismiss();
+                    return;
+                }
+                break;
+            case Crawler.UCODE_DONGGUK_IL:
+                geocode = Crawler.GEO_ILSAN;
+                if(id.length() != Crawler.LENGTH_DONGGUK) {
+                    showToast( mData.uname + "는 " + Crawler.LENGTH_DONGGUK + "자리 학번을 사용합니다");
+                    _login.setEnabled(true);
+                    pdial.dismiss();
                     return;
                 }
                 break;
             case Crawler.UCODE_SOGANG:
+                geocode = Crawler.GEO_SEOUL;
                 if(id.length() != Crawler.LENGTH_SOGANG) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_SOGANG + "자리 학번을 사용합니다");
+                    _login.setEnabled(true);
+                    pdial.dismiss();
                     return;
                 }
                 break;
             case Crawler.UCODE_KOOKMIN:
+                geocode = Crawler.GEO_SEOUL;
                 if(id.length() != Crawler.LENGTH_KOOKMIN) {
                     showToast( mData.uname + "는 " + Crawler.LENGTH_KOOKMIN + "자리 학번을 사용합니다");
+                    _login.setEnabled(true);
+                    pdial.dismiss();
                     return;
                 }
                 break;
-            default: return;
+            default:
+                _login.setEnabled(true);
+                pdial.dismiss();
+                return;
         }
         if(pw.length() < 1){
             showToast("패스워드를 입력하세요");
+            _login.setEnabled(true);
+            pdial.dismiss();
             return;
         }
-        /*
-        _login.setEnabled(false);
-        _id.setError(null);
-        _pw.setError(null);
-        if(_id.getText().length() <= 0 || _id.getText().length() > 20){
-            _id.setError("유효한 정보를 입력하세요");
-            return;
-        }
-        if(_pw.getText().length() < 5){
-            _pw.setError("유효한 패스워드를 입력하세요");
-            return;
-        }
-        final ProgressDialog pdial = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
-        pdial.setMessage("계정 정보를 불러오는 중...");
-        pdial.setCancelable(false);
-        pdial.show();
-        _login.setEnabled(true);
-        pdial.dismiss();
-*/
+
         // on success
         prefEditor.putString("id", "2014112021");
         prefEditor.putString("name", "함의진");
         prefEditor.putInt("ucode", spinList.get(_spinner.getSelectedItemPosition()).ucode);
         prefEditor.commit();
 
-        WeatherParser.getWeather("서울", new Handler(){
+        WeatherParser.getWeather(geocode, new Handler(){
             @Override
             public void handleMessage(Message msg){
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
+                pdial.dismiss();
+                _login.setEnabled(true);
                 finish();
             }
         });
