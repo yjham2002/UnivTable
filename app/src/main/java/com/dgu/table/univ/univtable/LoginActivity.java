@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +23,8 @@ import java.util.List;
 import crawl.Crawler;
 import crawl.DonggukCrawler;
 import crawl.SogangCrawler;
+import util.SFCallback;
+import util.WeatherParser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void signIn(String id, String pw){
         final UnivItem mData = spinList.get(_spinner.getSelectedItemPosition());
+
         switch (mData.ucode){
             case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_IL: case Crawler.UCODE_DONGGUK_GY:
                 if(id.length() != Crawler.LENGTH_DONGGUK) {
@@ -99,15 +105,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         prefEditor.putInt("ucode", spinList.get(_spinner.getSelectedItemPosition()).ucode);
         prefEditor.commit();
 
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        finish();
+        WeatherParser.getWeather("서울", new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
 
     public void initView(){
         _login = (Button)findViewById(R.id.bt_signin);
         _id = (EditText)findViewById(R.id.idp);
         _pw = (EditText)findViewById(R.id.pwp);
+        _pw.setTransformationMethod(new PasswordTransfromMethod());
         _login.setOnClickListener(this);
 
         sAdapter = new SpinnerAdapter(this, spinList, R.layout.item_layout, R.layout.item_layout2);
@@ -141,5 +154,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         initView();
     }
+
+    public class PasswordTransfromMethod extends PasswordTransformationMethod {
+        @Override
+        public CharSequence getTransformation(CharSequence source, View view) {
+            return new PasswordCharSequence(source);
+        }
+
+        private class PasswordCharSequence implements CharSequence {
+            private CharSequence mSource;
+            public PasswordCharSequence(CharSequence source) {
+                mSource = source;
+            }
+            public char charAt(int index) {
+                return '●';
+            }
+            public int length() {
+                return mSource.length();
+            }
+            public CharSequence subSequence(int start, int end) {
+                return mSource.subSequence(start, end); // Return default
+            }
+        }
+    };
 
 }

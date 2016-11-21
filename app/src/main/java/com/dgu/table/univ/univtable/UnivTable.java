@@ -1,8 +1,10 @@
 package com.dgu.table.univ.univtable;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.tsengvn.typekit.Typekit;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class UnivTable extends Application {
     @Override
@@ -12,4 +14,5 @@ public class UnivTable extends Application {
                 .addNormal(Typekit.createFromAsset(this, "fonts/NanumSquareR.ttf"))
                 .addBold(Typekit.createFromAsset(this, "fonts/NanumSquareB.ttf"));
     }
+
 }

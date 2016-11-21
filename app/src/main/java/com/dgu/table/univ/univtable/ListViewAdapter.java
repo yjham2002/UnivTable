@@ -1,18 +1,25 @@
 package com.dgu.table.univ.univtable;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import crawl.ClassInfo;
+import util.SFCallback;
+import util.WeatherParser;
 
 public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHolder> {
 
@@ -52,14 +59,19 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        ClassInfo mData = mListData.get(position);
-        holder._subject.setText(mData.title);
-        holder.cardview.setOnClickListener(new CardView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //final AssignInfo mData = staticInfo.mAdapter.mListData.get(position);
-            }
-        });
+        if(getItemViewType(position) == HEADER){
+            Picasso.with(mContext).load(WeatherParser.getImageUrl()).into(holder._wIcon);
+            holder._subject.setText(WeatherParser.getWeatherInfo());
+        }else {
+            ClassInfo mData = mListData.get(position);
+            holder._subject.setText(mData.title);
+            holder.cardview.setOnClickListener(new CardView.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //final AssignInfo mData = staticInfo.mAdapter.mListData.get(position);
+                }
+            });
+        }
     }
 
     @Override
@@ -69,12 +81,15 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView _subject;
+        public ImageView _wIcon;
         public CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            _subject = (TextView)itemView.findViewById(R.id.subject);
-            cardview = (CardView)itemView.findViewById(R.id.cardview);
+            _wIcon = (ImageView) itemView.findViewById(R.id.wIcon);
+            _subject = (TextView) itemView.findViewById(R.id.subject);
+            cardview = (CardView) itemView.findViewById(R.id.cardview);
+
         }
     }
 

@@ -6,6 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/frameLayout">
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/bt_exit"
+            android:layout_gravity="center_vertical|right"
+            android:layout_width="@dimen/actionbar_dimen"
+            android:layout_height="@dimen/actionbar_dimen"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_text"
+            android:text="닫기"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="주간시간표"
+            android:id="@+id/title"
+            android:layout_gravity="center"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
     <weekview.WeekView
         android:id="@+id/weekView"
         android:layout_width="match_parent"
@@ -13,15 +44,17 @@
         app:eventTextColor="@color/white"
         app:textSize="12dp"
         app:hourHeight="50dp"
-        app:todayHeaderTextColor="@color/colorPrimaryDark2"
+        app:todayHeaderTextColor="@color/white"
         app:headerColumnPadding="@dimen/week_padding"
-        app:headerColumnTextColor="#8f000000"
+        app:headerColumnTextColor="@color/grayline"
         app:headerRowPadding="10dp"
         app:columnGap="@dimen/week_padding"
         app:noOfVisibleDays="5"
         app:eventMarginVertical="2dp"
-        app:headerRowBackgroundColor="@color/white"
-        app:todayBackgroundColor="#FFFFB4"
+        android:background="@color/colorPrimaryDark"
+        app:dayBackgroundColor="@color/oil"
+        app:headerRowBackgroundColor="@color/colorPrimaryDark"
+        app:todayBackgroundColor="@color/monsoon"
         app:headerColumnBackground="#ffffffff"/>
 
 </LinearLayout>

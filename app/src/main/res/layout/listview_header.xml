@@ -7,30 +7,55 @@
     android:layout_margin="5dp"
     card_view:cardCornerRadius="5dp"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        >
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:padding="@dimen/default_margin"
-            android:layout_weight="7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+       <TextView
+           android:layout_marginTop="13dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="13dp"
+           android:textColor="@color/monsoon"
+           android:text="오늘의 날씨"
+           android:textSize="@dimen/default_text"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:id="@+id/subject"
-                android:textColor="@color/jet"
-                android:textSize="@dimen/default_text_large" />
+       <LinearLayout
+           android:background="@color/form_bg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:padding="5dp"
+           >
+           <ImageView
+               android:id="@+id/wIcon"
+               android:layout_gravity="center_vertical"
+               android:src="@drawable/smile"
+               android:padding="5dp"
+               android:layout_width="@dimen/iconSize"
+               android:layout_height="@dimen/iconSize" />
+           <LinearLayout
+               android:orientation="vertical"
+               android:padding="@dimen/default_margin"
+               android:layout_weight="7"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
 
-        </LinearLayout>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="TextView"
+                   android:id="@+id/subject"
+                   android:layout_gravity="center_vertical"
+                   android:textColor="@color/jet"
+                   android:textSize="@dimen/default_text_mid" />
 
-    </LinearLayout>
+           </LinearLayout>
+
+       </LinearLayout>
+
+   </LinearLayout>
 </android.support.v7.widget.CardView>
 

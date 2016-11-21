@@ -160,7 +160,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             public CharSequence getPageTitle(int position) {
                 switch (position % 4) {
                     case 0:
-                        return "시간표";
+                        return "Today";
                     case 1:
                         return "과제목록";
                     case 2:
@@ -177,10 +177,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             @Override
             public HeaderDesign getHeaderDesign(int page) {
                 switch (page) {
-                    case 0: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_1);
-                    case 1: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_2);
-                    case 2: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_3);
-                    case 3: return HeaderDesign.fromColorResAndUrl(R.color.darklime, Additional_URL.ImgUrl_4);
+                    case 0: return HeaderDesign.fromColorResAndUrl(R.color.colorPrimaryDark, Additional_URL.ImgUrl_1);
+                    case 1: return HeaderDesign.fromColorResAndUrl(R.color.colorPrimaryDark, Additional_URL.ImgUrl_2);
+                    case 2: return HeaderDesign.fromColorResAndUrl(R.color.colorPrimaryDark, Additional_URL.ImgUrl_3);
+                    case 3: return HeaderDesign.fromColorResAndUrl(R.color.colorPrimaryDark, Additional_URL.ImgUrl_4);
                 }
 
                 //execute others actions if needed (ex : modify your header logo)

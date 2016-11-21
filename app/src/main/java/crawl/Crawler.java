@@ -10,11 +10,11 @@ import util.SFCallback;
 
 public abstract class Crawler extends AsyncTask<Void, Void, String> {
 
-    public static final int UCODE_DONGGUK = 0;
-    public static final int UCODE_KOOKMIN = 1;
-    public static final int UCODE_SOGANG = 2;
-    public static final int UCODE_DONGGUK_IL = 3;
-    public static final int UCODE_DONGGUK_GY = 4;
+    public static final int UCODE_DONGGUK = 1;
+    public static final int UCODE_KOOKMIN = 4;
+    public static final int UCODE_SOGANG = 3;
+    public static final int UCODE_DONGGUK_IL = 2;
+    public static final int UCODE_DONGGUK_GY = 5;
 
     public static final int LENGTH_DONGGUK = 10;
     public static final int LENGTH_SOGANG = 8;
