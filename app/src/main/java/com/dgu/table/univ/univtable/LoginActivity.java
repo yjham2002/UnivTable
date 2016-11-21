@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     _login.setEnabled(true);
                     finish();
                 }else{
-                    showToast("로그인할 수 없습니다");
+                    showToast("로그인에 실패하였습니다");
                     _login.setEnabled(true);
                     pdial.dismiss();
                     return;

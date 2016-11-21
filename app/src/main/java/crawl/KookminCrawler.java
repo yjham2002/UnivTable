@@ -30,6 +30,7 @@ public class KookminCrawler extends Crawler{
         FORM_PW = "txt_passwd";
         ID = userId;
         PW = userPw;
+        CSS = "table>tbody>tr>td[colspan=2]";
     }
 
     @Override
