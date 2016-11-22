@@ -2,6 +2,8 @@ package crawl;
 
 import android.os.Handler;
 
+import java.io.IOException;
+
 public class SogangCrawler extends Crawler{
 
     /**
@@ -23,11 +25,7 @@ public class SogangCrawler extends Crawler{
     }
 
     @Override
-    public void getDailyTime(){
-
-    }
-    @Override
-    public void getTimetable(){
+    public void getTimetable(final Handler mHandler) {
 
     }
 

@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class KookminCrawler extends Crawler{
 
-    public ArrayList<ClassInfo> classList = new ArrayList<>();
-
     /**
      * KOOKMIN UNIVERSITY
      * */
@@ -34,11 +32,7 @@ public class KookminCrawler extends Crawler{
     }
 
     @Override
-    public void getDailyTime(){
-
-    }
-    @Override
-    public void getTimetable(){
+    public void getTimetable(final Handler mHandler){
 
     }
 

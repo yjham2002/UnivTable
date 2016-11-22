@@ -30,6 +30,8 @@ public abstract class Crawler {
     public static final int LENGTH_KOOKMIN = 8;
 
     protected String userName = "";
+    protected String trashValue = "";
+
     protected ArrayList<ClassInfo> classList = new ArrayList<>();
     protected ArrayList<HandInfo> handList = new ArrayList<>();
 
@@ -93,8 +95,7 @@ public abstract class Crawler {
         t.start();
     }
 
-    public abstract void getDailyTime();
-    public abstract void getTimetable();
+    public abstract void getTimetable(final Handler mHandler);
 
     protected static final int TIMEOUT = 15000;
 
