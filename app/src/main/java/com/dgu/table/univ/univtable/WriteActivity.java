@@ -18,6 +18,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.util.HashMap;
 
 import util.Communicator;
+import util.URL;
 
 public class WriteActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -42,7 +43,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         data.put("mid", Integer.toString(mid));
         data.put("content", msg);
         data.put("flag", Integer.toString(flag));
-        new Communicator().postHttp(URL.REST_MAIN + URL.REST_POST_ARTICLE, data, new Handler(){
+        new Communicator().postHttp(URL.MAIN + URL.REST_BOARD_NEW, data, new Handler(){
             @Override
             public void handleMessage(Message msg){
                 finish();

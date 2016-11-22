@@ -28,8 +28,10 @@ import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import java.util.HashMap;
+
 import crawl.Crawler;
-import util.Additional_URL;
+import util.*;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -229,10 +231,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
+    public void regToken(){
+        HashMap<String, String> data = new HashMap<>();
+        //data.put("Token", pref.getString("Token", "#"));
+        //data.put("mid", Integer.toString(pref.getInt("id", 0)));
+        //new Communicator().postHttp(util.URL.MAIN + util.URL.REST_GCM_NEW, data, new Handler(){});
+    }
+
     @Override
     public void onResume(){
         super.onResume();
         mDrawerToggle.syncState();
+        regToken();
     }
 
     @Override

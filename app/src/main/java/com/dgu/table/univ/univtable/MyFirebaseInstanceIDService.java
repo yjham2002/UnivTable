@@ -1,5 +1,6 @@
 package com.dgu.table.univ.univtable;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -8,15 +9,20 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
+    private SharedPreferences pref;
+    private SharedPreferences.Editor prefEditor;
     private static final String TAG = "MyFirebaseIIDService";
 
     @Override
     public void onTokenRefresh() {
         // Get updated InstanceID token.
+
+        pref = getSharedPreferences("Univtable", MODE_PRIVATE);
+        prefEditor = pref.edit();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
-
-        sendRegistrationToServer(refreshedToken);
+        prefEditor.putString("Token" ,refreshedToken);
+        prefEditor.commit();
     }
 
     private void sendRegistrationToServer(String token) {

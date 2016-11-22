@@ -6,6 +6,8 @@ public class ArticleItem {
     public String content = "Content of Article will be displayed in here.";
     public int flag = 0;
     public int hit = 0;
+    public int ucode = 0;
+    public String name = "Unknown";
     public String date = "2000-10-01T00:00:00.000Z";
 
     public ArticleItem(){}

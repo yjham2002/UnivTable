@@ -1,7 +1,7 @@
 package util;
 
 public class URL {
-    public static final String MAIN = "http://lelab.cafe24.com";
+    public static final String MAIN = "http://univtable.cafe24app.com";
 
     public static final String REST_BOARD_ALL = "/board";
     public static final String REST_BOARD_NEW = "/board/new";
