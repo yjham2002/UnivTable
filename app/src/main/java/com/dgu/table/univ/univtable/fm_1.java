@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,13 @@ import android.widget.Toast;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 
+import java.util.Calendar;
+
 import crawl.ClassInfo;
 import crawl.Crawler;
+import crawl.DonggukCrawler;
+import crawl.KookminCrawler;
+import crawl.SogangCrawler;
 import util.WeatherParser;
 
 public class fm_1 extends Fragment implements View.OnClickListener{
@@ -49,12 +55,6 @@ public class fm_1 extends Fragment implements View.OnClickListener{
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView);
 
-        for(int i = 0; i < DUMMY_COUNT; i++){
-            testAdapter.addItem(new ClassInfo());
-        }
-
-        loadList();
-
         return rootView;
     }
 
@@ -68,6 +68,8 @@ public class fm_1 extends Fragment implements View.OnClickListener{
             }
         });
 
+        loadList();
+
     }
 
     public void dataChanged(){
@@ -80,7 +82,42 @@ public class fm_1 extends Fragment implements View.OnClickListener{
     }
 
     public void loadList(){
-        testAdapter.addItem(new ClassInfo());
-        dataChanged();
+        final Crawler Tcrawler;
+        // Crawling Routine Begin
+        switch (pref.getInt("ucode", 0)){
+            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_GY: case Crawler.UCODE_DONGGUK_IL:
+                Tcrawler = new DonggukCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            case Crawler.UCODE_KOOKMIN:
+                Tcrawler = new KookminCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            case Crawler.UCODE_SOGANG:
+                Tcrawler = new SogangCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            default:
+                Tcrawler = null;
+                break;
+        }
+        Tcrawler.getTimetable(new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                testAdapter.mListData.clear();
+                for(int i = 0; i < DUMMY_COUNT; i++){
+                    testAdapter.addItem(new ClassInfo());
+                }
+                Calendar calendar = Calendar.getInstance( );
+                final int wday = calendar.get(Calendar.DAY_OF_WEEK);
+                for(ClassInfo c : Tcrawler.getClassList()) {
+                    String sH = c.startHour < 10 ? "0" + c.startHour : " " + c.startHour;
+                    String sM = c.startMin < 10 ? "0" + c.startMin : " " + c.startMin;
+                    String eH = c.endHour < 10 ? "0" + c.endHour : " " + c.endHour;
+                    String eM = c.endMin < 10 ? "0" + c.endMin : " " + c.endMin;
+                    c.rawtime = sH + "시 " + sM + "분 - " + eH + "시 " + eM + "분";
+                    if(wday - 1 == c.weekDay) testAdapter.addItem(c);
+                }
+                dataChanged();
+            }
+        });
+
     }
 }

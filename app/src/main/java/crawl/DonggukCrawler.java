@@ -37,6 +37,8 @@ public class DonggukCrawler extends Crawler {
 
     @Override
     public void getTimetable(final Handler mHandler){
+        classList.clear();
+        handList.clear();
         Thread t = new Thread() {
             public void run() {
                 try {
@@ -48,17 +50,6 @@ public class DonggukCrawler extends Crawler {
                             .timeout(TIMEOUT)
                             .execute();
 
-                    document = Jsoup.connect(URL_HOME)
-                            .followRedirects(true)
-                            .cookies(response.cookies())
-                            .followRedirects(true)
-                            .method(Connection.Method.POST)
-                            .timeout(TIMEOUT)
-                            .post();
-                    Elements name = document.select("span.user");
-                    userName = name.text();
-                    //System.out.println(userName);
-                    //사용자 이름 로그
                     document = Jsoup.connect(URL_HAND)
                             .followRedirects(true)
                             .cookies(response.cookies())

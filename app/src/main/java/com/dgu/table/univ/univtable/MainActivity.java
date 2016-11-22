@@ -32,6 +32,8 @@ import java.util.HashMap;
 
 import crawl.Crawler;
 import crawl.DonggukCrawler;
+import crawl.KookminCrawler;
+import crawl.SogangCrawler;
 import util.*;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{

@@ -65,6 +65,8 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
         }else {
             ClassInfo mData = mListData.get(position);
             holder._subject.setText(mData.title);
+            holder._time.setText(mData.rawtime);
+            holder._location.setText(mData.location);
             holder.cardview.setOnClickListener(new CardView.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,13 +82,15 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView _subject;
+        public TextView _subject, _time, _location;
         public ImageView _wIcon;
         public CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
             _wIcon = (ImageView) itemView.findViewById(R.id.wIcon);
+            _time = (TextView) itemView.findViewById(R.id.time);
+            _location = (TextView) itemView.findViewById(R.id.location);
             _subject = (TextView) itemView.findViewById(R.id.subject);
             cardview = (CardView) itemView.findViewById(R.id.cardview);
 
