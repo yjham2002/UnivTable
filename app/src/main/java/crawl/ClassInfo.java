@@ -1,12 +1,16 @@
 package crawl;
 
+import java.util.Calendar;
+
+import weekview.WeekViewEvent;
+
 public class ClassInfo {
     public static final int NULLPTR = -1;
 
-    public String title = "강의 정보"; // title of Lecture
+    public String title = ""; // title of Lecture
 
-    public String location = "강의실 정보"; // Location of Lecture
-    public String rawtime = "시간 정보"; // time in raw state
+    public String location = ""; // Location of Lecture
+    public String rawtime = ""; // time in raw state
     public int weekDay = NULLPTR;
     public int startHour = NULLPTR;
     public int startMin = NULLPTR;
@@ -29,4 +33,21 @@ public class ClassInfo {
     public ClassInfo clone(){
         return new ClassInfo(title, location, rawtime, weekDay, startHour, startMin, endHour, endMin);
     }
+
+    public WeekViewEvent toWeekViewEvent(int newYear, int newMonth){
+        Calendar startTime = Calendar.getInstance();
+        startTime.set(Calendar.YEAR, newYear);
+        startTime.set(Calendar.MONTH, newMonth - 1);
+        startTime.set(Calendar.DAY_OF_WEEK, weekDay + 1);
+        startTime.set(Calendar.HOUR_OF_DAY, startHour);
+        startTime.set(Calendar.MINUTE, startMin);
+        Calendar endTime = (Calendar) startTime.clone();
+        endTime.set(Calendar.HOUR_OF_DAY, endHour);
+        endTime.set(Calendar.MINUTE, endMin);
+        WeekViewEvent res = new WeekViewEvent(0, "[" + title + "]\n" + location, startTime, endTime);
+        res.title = this.title;
+        res.loc = this.location;
+        return res;
+    }
+
 }

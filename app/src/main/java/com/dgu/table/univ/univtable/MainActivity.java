@@ -31,6 +31,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import java.util.HashMap;
 
 import crawl.Crawler;
+import crawl.DonggukCrawler;
 import util.*;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
@@ -126,6 +127,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         prefEditor = pref.edit();
 
         initView();
+
         switch (pref.getInt("ucode", -1)){
             case -1:
                 setUCODE(null, getResources().getDrawable(R.drawable.smile));
