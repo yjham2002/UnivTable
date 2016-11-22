@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -20,6 +21,8 @@ import java.util.List;
 import crawl.ClassInfo;
 import crawl.Crawler;
 import crawl.DonggukCrawler;
+import crawl.KookminCrawler;
+import crawl.SogangCrawler;
 import weekview.MonthLoader;
 import weekview.WeekView;
 import weekview.WeekViewEvent;
@@ -30,6 +33,8 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
 
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
+
+    private ProgressBar pbar;
 
     private WeekView mWeekView;
 
@@ -62,7 +67,9 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
         List<WeekViewEvent> events = new ArrayList<>();
 
         for(ClassInfo e : Tcrawler.getClassList()) {
-            events.add(e.toWeekViewEvent(newYear, newMonth));
+            WeekViewEvent wvEvent = e.toWeekViewEvent(newYear, newMonth);
+            wvEvent.setColor(getResources().getColor(R.color.darklime));
+            events.add(wvEvent);
         }
 
         return events;
@@ -86,6 +93,8 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
         pref = getSharedPreferences("Univtable", MODE_PRIVATE);
         prefEditor = pref.edit();
 
+        pbar = (ProgressBar)findViewById(R.id.pbar);
+
         mWeekView = (WeekView)findViewById(R.id.weekView);
         mWeekView.setOnEventClickListener(this);
         mWeekView.setEventLongPressListener(this);
@@ -95,11 +104,33 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
         fix.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         mWeekView.goToDate(fix);
 
-        Tcrawler = new DonggukCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
-        Tcrawler.getTimetable(new Handler(){
+        switch (pref.getInt("ucode", 0)){
+            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_GY: case Crawler.UCODE_DONGGUK_IL:
+                Tcrawler = new DonggukCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            case Crawler.UCODE_KOOKMIN:
+                Tcrawler = new KookminCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            case Crawler.UCODE_SOGANG:
+                Tcrawler = new SogangCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            default:
+                Tcrawler = null;
+                break;
+        }
+
+        mWeekView.setVisibility(View.INVISIBLE);
+        mWeekView.setAlpha(0.0f);
+        mWeekView.setTranslationY(mWeekView.getHeight() / 3);
+
+        if(pref.getInt("ucode", 0) != 0) Tcrawler.getTimetable(new Handler(){
             @Override
             public void handleMessage(Message msg){
                 mWeekView.notifyDatasetChanged();
+                mWeekView.setVisibility(View.VISIBLE);
+                mWeekView.animate().alpha(1.0f).translationY(0);
+                pbar.animate().alpha(0.0f);
+                pbar.setVisibility(View.GONE);
             }
         });
 

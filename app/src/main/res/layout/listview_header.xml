@@ -46,7 +46,7 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:text="TextView"
+                   android:text="데이터 로드 중..."
                    android:id="@+id/subject"
                    android:layout_gravity="center_vertical"
                    android:textColor="@color/jet"

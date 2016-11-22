@@ -37,24 +37,39 @@
 
     </FrameLayout>
 
-    <weekview.WeekView
-        android:id="@+id/weekView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:eventTextColor="@color/white"
-        app:textSize="12dp"
-        app:hourHeight="50dp"
-        app:todayHeaderTextColor="@color/white"
-        app:headerColumnPadding="@dimen/week_padding"
-        app:headerColumnTextColor="@color/grayline"
-        app:headerRowPadding="10dp"
-        app:columnGap="@dimen/week_padding"
-        app:noOfVisibleDays="5"
-        app:eventMarginVertical="2dp"
+    <FrameLayout
         android:background="@color/colorPrimaryDark"
-        app:dayBackgroundColor="@color/oil"
-        app:headerRowBackgroundColor="@color/colorPrimaryDark"
-        app:todayBackgroundColor="@color/monsoon"
-        app:headerColumnBackground="#ffffffff"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <weekview.WeekView
+            android:id="@+id/weekView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:eventTextColor="@color/white"
+            app:textSize="12dp"
+            app:hourHeight="50dp"
+            android:visibility="invisible"
+            app:todayHeaderTextColor="@color/white"
+            app:headerColumnPadding="@dimen/week_padding"
+            app:headerColumnTextColor="@color/grayline"
+            app:headerRowPadding="10dp"
+            app:hourSeparatorColor="@color/transparent_gray"
+            app:columnGap="@dimen/week_padding"
+            app:noOfVisibleDays="5"
+            app:eventMarginVertical="2dp"
+            android:background="@color/colorPrimaryDark"
+            app:dayBackgroundColor="@color/oil"
+            app:headerRowBackgroundColor="@color/colorPrimaryDark"
+            app:todayBackgroundColor="@color/monsoon"
+            app:headerColumnBackground="#ffffffff"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pbar"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
 
 </LinearLayout>

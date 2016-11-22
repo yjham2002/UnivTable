@@ -47,6 +47,8 @@ public class ClassInfo {
         WeekViewEvent res = new WeekViewEvent(0, "[" + title + "]\n" + location, startTime, endTime);
         res.title = this.title;
         res.loc = this.location;
+        res.classInfo = this;
+
         return res;
     }
 
