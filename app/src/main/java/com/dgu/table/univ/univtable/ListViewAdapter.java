@@ -103,7 +103,7 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
     }
 
     public void addItem(ClassInfo addInfo){
-        mListData.add(addInfo);
+        mListData.add(addInfo.clone());
     }
     public void dataChange(){
         this.notifyDataSetChanged();

@@ -32,6 +32,8 @@ public class fm_1 extends Fragment implements View.OnClickListener{
 
     private static final int DUMMY_COUNT = 1;
 
+    private Crawler Tcrawler;
+
     private ProgressBar pbar;
 
     private SharedPreferences pref;
@@ -59,6 +61,21 @@ public class fm_1 extends Fragment implements View.OnClickListener{
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView);
+
+        switch (pref.getInt("ucode", 0)){
+            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_GY: case Crawler.UCODE_DONGGUK_IL:
+                Tcrawler = new DonggukCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            case Crawler.UCODE_KOOKMIN:
+                Tcrawler = new KookminCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            case Crawler.UCODE_SOGANG:
+                Tcrawler = new SogangCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
+                break;
+            default:
+                Tcrawler = null;
+                break;
+        }
 
         return rootView;
     }
@@ -88,22 +105,8 @@ public class fm_1 extends Fragment implements View.OnClickListener{
 
     public void loadList(){
         pbar.setVisibility(View.VISIBLE);
-        final Crawler Tcrawler;
         // Crawling Routine Begin
-        switch (pref.getInt("ucode", 0)){
-            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_GY: case Crawler.UCODE_DONGGUK_IL:
-                Tcrawler = new DonggukCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
-                break;
-            case Crawler.UCODE_KOOKMIN:
-                Tcrawler = new KookminCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
-                break;
-            case Crawler.UCODE_SOGANG:
-                Tcrawler = new SogangCrawler(pref.getString("id", "#"), pref.getString("pw", "#"));
-                break;
-            default:
-                Tcrawler = null;
-                break;
-        }
+
         Tcrawler.getTimetable(new Handler(){
             @Override
             public void handleMessage(Message msg){

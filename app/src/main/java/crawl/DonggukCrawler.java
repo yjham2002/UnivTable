@@ -59,7 +59,7 @@ public class DonggukCrawler extends Crawler {
                             .post();
                     Elements hwTable = document.select("table.list-table");
                     for (Element trTags : hwTable.select("tr")) {
-                        handList.add(new HandInfo(trTags.child(0).text(), trTags.child(1).text(), trTags.child(2).text(),
+                        if(!trTags.child(0).text().toString().equals("No")) handList.add(new HandInfo(trTags.child(0).text(), trTags.child(1).text(), trTags.child(2).text(),
                                 trTags.child(3).text(), trTags.child(4).text(), trTags.child(5).text(), trTags.child(6).text()));
                     }
 

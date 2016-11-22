@@ -32,8 +32,8 @@ public abstract class Crawler {
     protected String userName = "";
     protected String trashValue = "";
 
-    protected static ArrayList<ClassInfo> classList = new ArrayList<>();
-    protected static ArrayList<HandInfo> handList = new ArrayList<>();
+    protected ArrayList<ClassInfo> classList = new ArrayList<>();
+    protected ArrayList<HandInfo> handList = new ArrayList<>();
 
     protected Document document;
 
@@ -46,10 +46,6 @@ public abstract class Crawler {
     protected String CSS;
     protected String ID;
     protected String PW;
-
-    public String getAuth(){
-        return URL_AUTH;
-    }
 
     public ArrayList<ClassInfo> getClassList(){
         return classList;
