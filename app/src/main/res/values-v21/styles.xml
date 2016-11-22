@@ -30,6 +30,13 @@
 
     </style>
 
+    <style name="DarkProgress" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/monsoon</item>
+        <item name="colorControlNormal">@color/monsoon</item>
+        <item name="colorControlActivated">@color/monsoon</item>
+    </style>
+
+
     <style name="AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <!-- White arrow -->
         <item name="colorControlNormal">@android:color/white</item>

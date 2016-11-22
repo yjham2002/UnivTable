@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
@@ -31,6 +32,8 @@ public class fm_1 extends Fragment implements View.OnClickListener{
 
     private static final int DUMMY_COUNT = 1;
 
+    private ProgressBar pbar;
+
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
 
@@ -42,6 +45,8 @@ public class fm_1 extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View rootView = inflater.inflate(R.layout.fm_1, container, false);
+
+        pbar = (ProgressBar)rootView.findViewById(R.id.pbar);
 
         pref = getActivity().getSharedPreferences("Univtable", getActivity().MODE_PRIVATE);
         prefEditor = pref.edit();
@@ -82,6 +87,7 @@ public class fm_1 extends Fragment implements View.OnClickListener{
     }
 
     public void loadList(){
+        pbar.setVisibility(View.VISIBLE);
         final Crawler Tcrawler;
         // Crawling Routine Begin
         switch (pref.getInt("ucode", 0)){
@@ -116,6 +122,7 @@ public class fm_1 extends Fragment implements View.OnClickListener{
                     if(wday - 1 == c.weekDay) testAdapter.addItem(c);
                 }
                 dataChanged();
+                pbar.setVisibility(View.INVISIBLE);
             }
         });
 

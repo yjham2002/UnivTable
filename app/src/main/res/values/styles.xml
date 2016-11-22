@@ -41,6 +41,12 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="DarkProgress" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/monsoon</item>
+        <item name="colorControlNormal">@color/monsoon</item>
+        <item name="colorControlActivated">@color/monsoon</item>
+    </style>
+
     <style name="Theme.Transparent" parent="AppTheme">
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/colorPrimary</item>
