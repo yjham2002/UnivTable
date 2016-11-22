@@ -233,9 +233,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public void regToken(){
         HashMap<String, String> data = new HashMap<>();
-        //data.put("Token", pref.getString("Token", "#"));
-        //data.put("mid", Integer.toString(pref.getInt("id", 0)));
-        //new Communicator().postHttp(util.URL.MAIN + util.URL.REST_GCM_NEW, data, new Handler(){});
+        data.put("token", pref.getString("Token", "#"));
+        data.put("mid", Integer.toString(pref.getInt("mid", 0)));
+        new Communicator().postHttp(util.URL.MAIN + util.URL.REST_GCM_NEW, data, new Handler(){});
     }
 
     @Override

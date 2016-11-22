@@ -31,8 +31,11 @@ dependencies {
     compile 'com.android.support:design:24.2.0'
     compile 'com.tsengvn:typekit:1.0.1'
     compile 'org.jsoup:jsoup:1.10.1'
-    compile 'com.google.firebase:firebase-messaging:9.6.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.firebase:firebase-auth:9.6.1'
+    compile 'com.google.firebase:firebase-crash:9.6.1'
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

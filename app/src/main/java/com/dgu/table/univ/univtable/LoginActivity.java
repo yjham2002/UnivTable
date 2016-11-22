@@ -18,11 +18,20 @@ import android.widget.Toast;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import crawl.Crawler;
 import crawl.DonggukCrawler;
 import crawl.KookminCrawler;
 import crawl.SogangCrawler;
+import util.Communicator;
+import util.URL;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -139,11 +148,52 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     prefEditor.putString("name", msg.getData().getString("name"));
                     prefEditor.putInt("ucode", spinList.get(_spinner.getSelectedItemPosition()).ucode);
                     prefEditor.commit();
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
-                    pdial.dismiss();
-                    _login.setEnabled(true);
-                    finish();
+                    HashMap<String, String> dataSet = new HashMap<>();
+                    dataSet.put("uid", Integer.toString(pref.getInt("ucode", 0)));
+                    dataSet.put("stuid", msg.getData().getString("id"));
+                    dataSet.put("Name", msg.getData().getString("name"));
+                    new Communicator().postHttp(URL.MAIN + URL.REST_USER_NEW, dataSet, new Handler(){
+                        @Override
+                        public void handleMessage(Message msg){
+                            String jsonString = msg.getData().getString("jsonString");
+                            try {
+                                JSONArray json_arr = new JSONArray(jsonString);
+                                JSONObject json_list = json_arr.getJSONObject(0);
+                                Log.e("JSON", msg.getData().getString("jsonString"));
+                                prefEditor.putInt("mid", json_list.getInt("id"));
+                                prefEditor.commit();
+                            }catch (JSONException e){
+                                prefEditor.putBoolean("auto", false);
+                                prefEditor.putString("id", "#");
+                                prefEditor.putString("pw", "#");
+                                prefEditor.putString("name", "#");
+                                prefEditor.commit();
+                                showToast("로그인에 실패하였습니다");
+                                _login.setEnabled(true);
+                                pdial.dismiss();
+                                e.printStackTrace();
+                                return;
+                            }
+                            if(pref.getInt("mid", 0) == 0){
+                                prefEditor.putBoolean("auto", false);
+                                prefEditor.putString("id", "#");
+                                prefEditor.putString("pw", "#");
+                                prefEditor.putString("name", "#");
+                                prefEditor.commit();
+                                showToast("로그인에 실패하였습니다");
+                                _login.setEnabled(true);
+                                pdial.dismiss();
+                                return;
+                            }else{
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(i);
+                                pdial.dismiss();
+                                _login.setEnabled(true);
+                                finish();
+                            }
+                        }
+                    });
+
                 }else{
                     prefEditor.putBoolean("auto", false);
                     prefEditor.putString("id", "#");
