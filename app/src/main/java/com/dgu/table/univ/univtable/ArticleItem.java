@@ -12,17 +12,20 @@ public class ArticleItem {
 
     public ArticleItem(){}
 
-    public ArticleItem(int id, int mid, String content, int flag, int hit, String date) {
+    public ArticleItem(int id, int mid, String content, int flag, int hit, int ucode, String name, String date) {
         this.id = id;
         this.mid = mid;
         this.content = content;
         this.flag = flag;
         this.hit = hit;
+        this.ucode = ucode;
+        this.name = name;
         this.date = date;
+
     }
 
     public ArticleItem clone(){
-        return new ArticleItem(id, mid, content, flag, hit, date);
+        return new ArticleItem(id, mid, content, flag, hit, ucode, name, date);
     }
 
 }
