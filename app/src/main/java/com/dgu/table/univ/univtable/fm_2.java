@@ -97,16 +97,22 @@ public class fm_2 extends Fragment implements View.OnClickListener{
         pbar.setVisibility(View.VISIBLE);
         // Crawling Routine Begin
 
-        Tcrawler.getTimetable(new Handler(){
-            @Override
-            public void handleMessage(Message msg){
-                testAdapter.mListData.clear();
-                testAdapter.mListData.addAll(Tcrawler.getHandList());
-                dataChanged();
-                pbar.setVisibility(View.INVISIBLE);
-            }
-        });
-
+        if(Tcrawler instanceof SogangCrawler || Tcrawler instanceof KookminCrawler){
+            testAdapter.mListData.clear();
+            testAdapter.addItem(new HandInfo("0", "본 대학은 과제 목록을 지원하지 않습니다.", "빠른 시일 내로 지원하겠습니다.", "", "UnivTable", "", ""));
+            dataChanged();
+            pbar.setVisibility(View.INVISIBLE);
+        }else {
+            Tcrawler.getTimetable(new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    testAdapter.mListData.clear();
+                    testAdapter.mListData.addAll(Tcrawler.getHandList());
+                    dataChanged();
+                    pbar.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
     }
 
     public void dataChanged(){

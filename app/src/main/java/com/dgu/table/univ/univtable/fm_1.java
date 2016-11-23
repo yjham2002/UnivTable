@@ -117,10 +117,10 @@ public class fm_1 extends Fragment implements View.OnClickListener{
                 Calendar calendar = Calendar.getInstance( );
                 final int wday = calendar.get(Calendar.DAY_OF_WEEK);
                 for(ClassInfo c : Tcrawler.getClassList()) {
-                    String sH = c.startHour < 10 ? "0" + c.startHour : " " + c.startHour;
-                    String sM = c.startMin < 10 ? "0" + c.startMin : " " + c.startMin;
-                    String eH = c.endHour < 10 ? "0" + c.endHour : " " + c.endHour;
-                    String eM = c.endMin < 10 ? "0" + c.endMin : " " + c.endMin;
+                    String sH = c.startHour < 10 ? "0" + c.startHour : "" + c.startHour;
+                    String sM = c.startMin < 10 ? "0" + c.startMin : "" + c.startMin;
+                    String eH = c.endHour < 10 ? "0" + c.endHour : "" + c.endHour;
+                    String eM = c.endMin < 10 ? "0" + c.endMin : "" + c.endMin;
                     c.rawtime = sH + "시 " + sM + "분 - " + eH + "시 " + eM + "분";
                     if(wday - 1 == c.weekDay) testAdapter.addItem(c);
                 }

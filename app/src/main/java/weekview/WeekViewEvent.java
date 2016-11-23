@@ -23,7 +23,11 @@ public class WeekViewEvent {
     }
 
     public String getRawTime(){
-        String res = classInfo.startHour + ":" + classInfo.startMin + " - " + classInfo.endHour + ":" + classInfo.endMin;
+        String sH = classInfo.startHour < 10 ? "0" + classInfo.startHour : "" + classInfo.startHour;
+        String sM = classInfo.startMin < 10 ? "0" + classInfo.startMin : "" + classInfo.startMin;
+        String eH = classInfo.endHour < 10 ? "0" + classInfo.endHour : "" + classInfo.endHour;
+        String eM = classInfo.endMin < 10 ? "0" + classInfo.endMin : "" + classInfo.endMin;
+        String res = sH + ":" + sM + " - " + eH + ":" + eM;
         return res;
     }
 

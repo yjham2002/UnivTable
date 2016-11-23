@@ -1,6 +1,9 @@
 package crawl;
 
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -44,17 +47,6 @@ public class SogangCrawler extends Crawler{
                             .timeout(TIMEOUT)
                             .execute();
 
-                    document= Jsoup.connect(URL_HOME)
-                            .followRedirects(true)
-                            .cookies(response.cookies())
-                            .followRedirects(true)
-                            .method(Connection.Method.POST)
-                            .timeout(TIMEOUT)
-                            .post();
-                    Elements name=document.select("strong.site-font-color");
-                    userName=name.text();
-                    System.out.println("name: "+userName);
-
                     document=Jsoup.connect(URL_TIME)
                             .followRedirects(true)
                             .cookies(response.cookies())
@@ -62,51 +54,34 @@ public class SogangCrawler extends Crawler{
                             .method(Connection.Method.POST)
                             .timeout(TIMEOUT)
                             .post();
-                    Elements table=document.select("table.questionlist");
-                    // System.out.println(table.text());
 
-                    String Clist[][]=new String[56][8];
-                    int lineIndicator=-1;
+                    Elements table = document.select("table.questionlist");
+
+                    String Clist[][] = new String[56][8];
+
+                    int lineIndicator = -1;
 
                     for(Element trTags: table.select("tr")){
-                        if(lineIndicator%4 == 0) {
-                            for (int i = 1; i < 8; i++) {
-                                if (!trashValue.contains(trTags.child(i).text())) {
-                                    // System.out.println("[" + trTags.child(i).text() + "]");
-                                    Clist[lineIndicator][i-1] = trTags.child(i).text();
-                                }
-                            }
+                        if(lineIndicator % 4 == 0) {
+                            for (int i = 1; i < 8; i++) if (!trashValue.contains(trTags.child(i).text())) Clist[lineIndicator][i-1] = trTags.child(i).text();
                         }
-                        else{
-                            for(int i = 0; i < 7; i++){
-                                if (!trashValue.contains(trTags.child(i).text())) {
-                                    Clist[lineIndicator][i] = trTags.child(i).text();
-                                }
-                            }
+                        else if(lineIndicator != -1){
+                            for(int i = 0; i < 7; i++) if (!trashValue.contains(trTags.child(i).text())) Clist[lineIndicator][i] = trTags.child(i).text();
                         }
-
                         lineIndicator++;
-                    }
-
-                    //Clist 로그
-                    for(int i=0;i<56;i++){
-                        for(int j=0;j<7;j++){
-                            System.out.printf("[%s]", Clist[i][j]);
-                        }
-                        System.out.println();
                     }
 
                     for(int i=0;i<7;i++){
                         for(int j=0;j<56;j++){
                             if(!Clist[j][i].equals(" ")){
-                                System.out.println("title:"+Clist[j][i]);
-                                ClassInfo tmpclass=new ClassInfo();
+                                ClassInfo tmpclass = new ClassInfo();
+
                                 int TLindicator;
-                                String tmpStime;
                                 int timeIndicator;
                                 int sIndicator;
-                                String tmpEtime;
                                 int eIndicator;
+                                String tmpStime;
+                                String tmpEtime;
                                 String tmpRawtime;
                                 String tmpRawTL;
 
@@ -126,12 +101,15 @@ public class SogangCrawler extends Crawler{
                                 tmpclass.endHour=Integer.parseInt(tmpEtime.substring(0, eIndicator));
                                 tmpclass.endMin=Integer.parseInt(tmpEtime.substring(eIndicator+1, tmpEtime.length()));
                                 classList.add(tmpclass);
-                                j+=2;
+                                j += 2;
                             }
                         }
                     }
 
-                    System.out.println("end of sogangCrawler");
+                    Message msg = mHandler.obtainMessage();
+                    Bundle bundle = new Bundle();
+                    msg.setData(bundle);
+                    mHandler.sendMessage(msg);
                 }catch (IOException e){}
             }
         };
