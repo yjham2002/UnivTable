@@ -9,14 +9,13 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".UnivTable"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:largeHeap="true"
-        android:name=".UnivTable"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -27,7 +26,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
 
         <activity
             android:name=".IntroActivity"
@@ -53,10 +51,10 @@
             android:name=".NoticeActivity"
             android:theme="@style/SimpleBlack" />
         <activity android:name=".PrevActivity" />
-        <activity android:name=".ChatActivity"
-            android:theme="@style/SimpleBlack"
-            ></activity>
-
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/SimpleBlack" />
+        <activity android:name=".ChatListActivity"></activity>
     </application>
 
 </manifest>
