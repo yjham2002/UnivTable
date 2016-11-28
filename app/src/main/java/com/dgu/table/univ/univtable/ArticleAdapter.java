@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
         else tempContent = mData.content;
         holder._name.setText(mData.name);
         holder._content.setText(tempContent);
+        holder._comment.setText(Integer.toString(mData.comment));
         holder._date.setText(TimeCalculator.formatTimeString(mData.date));
         switch (mData.ucode){
             case -1:
@@ -76,12 +79,13 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView _name, _content, _date;
+        public TextView _name, _content, _date, _comment;
         public ImageView _iv;
         public CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            _comment = (TextView)itemView.findViewById(R.id.article_comment);
             _name = (TextView)itemView.findViewById(R.id.article_name);
             _content = (TextView)itemView.findViewById(R.id.article_content);
             _date = (TextView)itemView.findViewById(R.id.article_date);

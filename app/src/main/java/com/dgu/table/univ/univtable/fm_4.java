@@ -93,7 +93,6 @@ public class fm_4 extends Fragment implements View.OnClickListener{
                     JSONArray json_arr = new JSONArray(jsonString);
                     for(int i = 0; i < json_arr.length(); i++){
                         JSONObject json_list = json_arr.getJSONObject(i);
-                        Log.e("Article", json_list.toString());
                         ArticleItem item = new ArticleItem(
                                 json_list.getInt("id"),
                                 json_list.getInt("mid"),
@@ -102,7 +101,8 @@ public class fm_4 extends Fragment implements View.OnClickListener{
                                 json_list.getInt("hit"),
                                 json_list.getInt("ucode"),
                                 json_list.getString("name"),
-                                json_list.getString("date"));
+                                json_list.getString("date"),
+                                json_list.getInt("comment"));
                         testAdapter.addItem(item);
                     }
 

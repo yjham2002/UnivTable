@@ -12,16 +12,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="13dp"
-            android:id="@+id/article_name"
-            android:textColor="@color/monsoon"
-            android:text="성명"
-            android:textSize="@dimen/default_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="13dp"
+                android:id="@+id/article_name"
+                android:layout_gravity="left"
+                android:textColor="@color/monsoon"
+                android:text="성명"
+                android:textSize="@dimen/default_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="13dp"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/icon_comment"
+                    android:layout_width="@dimen/default_text"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="@dimen/default_text" />
+                <TextView
+                    android:id="@+id/article_comment"
+                    android:textColor="@color/monsoon"
+                    android:text="0"
+                    android:textSize="@dimen/default_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </FrameLayout>
 
         <View
             android:background="@color/grayline"

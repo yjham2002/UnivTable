@@ -6,13 +6,14 @@ public class ArticleItem {
     public String content = "Content of Article will be displayed in here.";
     public int flag = 0;
     public int hit = 0;
+    public int comment = 0;
     public int ucode = 0; // SQL
     public String name = "Unknown"; // SQL
     public String date = "2000-10-01T00:00:00.000Z";
 
     public ArticleItem(){}
 
-    public ArticleItem(int id, int mid, String content, int flag, int hit, int ucode, String name, String date) {
+    public ArticleItem(int id, int mid, String content, int flag, int hit, int ucode, String name, String date, int comment) {
         this.id = id;
         this.mid = mid;
         this.content = content;
@@ -21,10 +22,11 @@ public class ArticleItem {
         this.ucode = ucode;
         this.name = name;
         this.date = date;
+        this.comment = comment;
     }
 
     public ArticleItem clone(){
-        return new ArticleItem(id, mid, content, flag, hit, ucode, name, date);
+        return new ArticleItem(id, mid, content, flag, hit, ucode, name, date, comment);
     }
 
 }
