@@ -83,11 +83,12 @@ public class ListViewAdapter extends RecyclerView.Adapter<ListViewAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView _subject, _time, _location;
-        public ImageView _wIcon;
+        public ImageView _wIcon, _tfav;
         public CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            _tfav = (ImageView) itemView.findViewById(R.id.time_fav);
             _wIcon = (ImageView) itemView.findViewById(R.id.wIcon);
             _time = (TextView) itemView.findViewById(R.id.time);
             _location = (TextView) itemView.findViewById(R.id.location);

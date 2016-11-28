@@ -28,25 +28,8 @@ public class AttendListAdapter extends RecyclerView.Adapter<AttendListAdapter.Vi
     }
 
     @Override
-    public int getItemViewType(int position){
-        if(position == 0) return HEADER;
-        else return DEFAULT;
-    }
-
-    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
-        switch(viewType){
-            case DEFAULT:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_bid, parent, false);
-                break;
-            case HEADER:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_header, parent, false);
-                break;
-            default:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_bid, parent, false);
-                break;
-        }
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_attend, parent, false);
         return new ViewHolder(v);
     }
 

@@ -1,6 +1,7 @@
 package com.dgu.table.univ.univtable;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        ArticleItem mData = mListData.get(position);
+        final ArticleItem mData = mListData.get(position);
         String tempContent = "";
         if(mData.content.length() > 20) tempContent = mData.content.substring(0, 23) + "...";
         else tempContent = mData.content;
@@ -64,6 +65,15 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
                 holder._iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.icon_sogang));
                 break;
         }
+
+        holder._name.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(mContext, ChatActivity.class);
+                i.putExtra("partner", mData.mid);
+                mContext.startActivity(i);
+            }
+        });
 
         holder.cardview.setOnClickListener(new CardView.OnClickListener() {
             @Override

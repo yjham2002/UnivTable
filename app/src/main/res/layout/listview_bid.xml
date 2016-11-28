@@ -35,6 +35,7 @@
             android:padding="5dp"
             >
             <ImageView
+                android:id="@+id/time_fav"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/clock_icon"
                 android:padding="5dp"
