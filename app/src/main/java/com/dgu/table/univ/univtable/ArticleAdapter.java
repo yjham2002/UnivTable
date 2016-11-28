@@ -6,12 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import crawl.AttendInfo;
+import crawl.Crawler;
+import util.TimeCalculator;
 
 /**
  * Created by HP on 2016-11-14.
@@ -30,32 +33,35 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
     }
 
     @Override
-    public int getItemViewType(int position){
-        if(position == 0) return HEADER;
-        else return DEFAULT;
-    }
-
-    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
-        switch(viewType){
-            case DEFAULT:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_bid, parent, false);
-                break;
-            case HEADER:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_header, parent, false);
-                break;
-            default:
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_bid, parent, false);
-                break;
-        }
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listview_article, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         ArticleItem mData = mListData.get(position);
-        holder._subject.setText(mData.content);
+        String tempContent = "";
+        if(mData.content.length() > 20) tempContent = mData.content.substring(0, 23) + "...";
+        else tempContent = mData.content;
+        holder._name.setText(mData.name);
+        holder._content.setText(tempContent);
+        holder._date.setText(TimeCalculator.formatTimeString(mData.date));
+        switch (mData.ucode){
+            case -1:
+                holder._iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.smile));
+                break;
+            case Crawler.UCODE_DONGGUK: case Crawler.UCODE_DONGGUK_GY: case Crawler.UCODE_DONGGUK_IL:
+                holder._iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.icon_dongguk));
+                break;
+            case Crawler.UCODE_KOOKMIN:
+                holder._iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.icon_kookmin));
+                break;
+            case Crawler.UCODE_SOGANG:
+                holder._iv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.icon_sogang));
+                break;
+        }
+
         holder.cardview.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,12 +76,16 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView _subject;
+        public TextView _name, _content, _date;
+        public ImageView _iv;
         public CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            _subject = (TextView)itemView.findViewById(R.id.subject);
+            _name = (TextView)itemView.findViewById(R.id.article_name);
+            _content = (TextView)itemView.findViewById(R.id.article_content);
+            _date = (TextView)itemView.findViewById(R.id.article_date);
+            _iv = (ImageView)itemView.findViewById(R.id.favicon);
             cardview = (CardView)itemView.findViewById(R.id.cardview);
         }
     }

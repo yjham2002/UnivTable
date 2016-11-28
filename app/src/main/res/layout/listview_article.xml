@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="5dp"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="13dp"
+            android:id="@+id/article_name"
+            android:textColor="@color/monsoon"
+            android:text="성명"
+            android:textSize="@dimen/default_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="@color/grayline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            >
+            <ImageView
+                android:id="@+id/favicon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/smile"
+                android:padding="5dp"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/default_margin"
+                android:layout_weight="7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게시글"
+                    android:id="@+id/article_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/jet"
+                    android:textSize="@dimen/default_text_mid" />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/article_date"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/monsoon"
+                    android:text="게시 시간"
+                    android:textSize="@dimen/default_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+

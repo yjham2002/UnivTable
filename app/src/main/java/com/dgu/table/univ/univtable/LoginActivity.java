@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
-    public void signIn(String id, String pw){
+    public void signIn(final String id, final String pw){
         final ProgressDialog pdial = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
         pdial.setMessage("로그인하는 중...");
         pdial.setCancelable(false);

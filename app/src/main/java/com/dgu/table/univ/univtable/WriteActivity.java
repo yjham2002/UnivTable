@@ -2,6 +2,7 @@ package com.dgu.table.univ.univtable;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,9 @@ import util.URL;
 
 public class WriteActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private SharedPreferences pref;
+    private SharedPreferences.Editor prefEditor;
+
     private Button _cancel, _confirm;
     private EditText _textbox;
 
@@ -29,7 +33,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v){
         switch (v.getId()){
             case R.id.bt_confirm:
-                upload(0, _textbox.getText().toString(), 0);
+                upload(pref.getInt("mid", 0), _textbox.getText().toString(), 0);
                 break;
             case R.id.bt_cancel:
                 finish();
@@ -82,6 +86,10 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
+
+        pref = getSharedPreferences("Univtable", MODE_PRIVATE);
+        prefEditor = pref.edit();
+
         setView();
     }
 }
