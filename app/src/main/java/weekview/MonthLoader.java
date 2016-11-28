@@ -5,6 +5,10 @@ import java.util.List;
 
 public class MonthLoader implements WeekViewLoader {
 
+    /********************************************************
+     * This codes are referenced by Github(https://github.com/alamkanak/Android-Week-View)
+     ********************************************************/
+
     private MonthChangeListener mOnMonthChangeListener;
 
     public MonthLoader(MonthChangeListener listener){

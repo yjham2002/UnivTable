@@ -10,6 +10,11 @@ import crawl.ClassInfo;
 import static weekview.WeekViewUtil.*;
 
 public class WeekViewEvent {
+
+    /********************************************************
+     * This codes are referenced by Github(https://github.com/alamkanak/Android-Week-View)
+     ********************************************************/
+
     public ClassInfo classInfo;
     private long mId;
     private Calendar mStartTime;

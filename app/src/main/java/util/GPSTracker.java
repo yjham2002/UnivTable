@@ -1,6 +1,6 @@
 package util;
 
-        import android.app.Service;
+import android.app.Service;
         import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
@@ -15,6 +15,10 @@ package util;
         import android.util.Log;
 
 public class GPSTracker extends Service implements LocationListener {
+
+/********************************************************
+ * This codes are referenced by Google and StackOverflow
+ ********************************************************/
 
     private final Context mContext;
 
