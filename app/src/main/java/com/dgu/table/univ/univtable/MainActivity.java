@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(new Intent(this, TimetableActivity.class));
                 break;
             case R.id.drawer_chat:
-                startActivity(new Intent(this, ChatActivity.class));
+                startActivity(new Intent(this, ChatListActivity.class));
                 break;
             case R.id.drawer_logout:
                 onLogout();
