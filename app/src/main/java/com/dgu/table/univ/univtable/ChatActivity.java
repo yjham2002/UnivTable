@@ -86,7 +86,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void selectData(){
-        String sql = "select * from UNIVTABLE_CHAT where `from` = " + pref.getInt("mid", -1) + " OR `to` = "+ pref.getInt("mid", -1) +" order by `id` asc";
+        String sql = "select * from UNIVTABLE_CHAT where (`from` = " + pref.getInt("mid", -1) + " AND `to` = "+ partnerKey +") OR (`from` = "
+                + partnerKey + " AND `to` = "+ pref.getInt("mid", -1) +") order by `id` asc";
         Cursor result = database.rawQuery(sql, null);
         result.moveToFirst();
         cAdapter.mListData.clear();
@@ -105,6 +106,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void init(){
+        partnerKey = getIntent().getExtras().getInt("partner"); // NEED TO BE MODIFIED
+
         createDatabase();
         createTable();
 
@@ -136,7 +139,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        partnerKey = getIntent().getExtras().getInt("partner"); // NEED TO BE MODIFIED
     }
 
     @Override
