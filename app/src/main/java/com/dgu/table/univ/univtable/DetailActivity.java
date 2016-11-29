@@ -41,6 +41,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v){
         switch (v.getId()){
+            case R.id.detail_submit:
+                break;
+            case R.id.detail_remove:
+                break;
+            case R.id.detail_exit:
+                finish();
+                break;
             default: break;
         }
     }

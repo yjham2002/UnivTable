@@ -40,6 +40,26 @@ public class ClassInfo {
         return new ClassInfo(title, location, rawtime, weekDay, startHour, startMin, endHour, endMin);
     }
 
+    public void categorizeKookminClass(String rawdata){
+        int titleIndex;
+        int locationIndex;
+        titleIndex=rawdata.indexOf("(");
+        locationIndex=rawdata.indexOf(")");
+        this.title=rawdata.substring(0, titleIndex-1).replaceAll(" ", "");
+        this.location=rawdata.substring(locationIndex+1, rawdata.length());
+    }
+
+    public void insertTime(String startRawtime, String endRawtime){
+        int sColonIndicator=-1;
+        int eColonIndicator=-1;
+        sColonIndicator=startRawtime.indexOf(":");
+        eColonIndicator=endRawtime.indexOf(":");
+        this.startHour=Integer.parseInt(startRawtime.substring(0, sColonIndicator));
+        this.startMin=Integer.parseInt(startRawtime.substring(sColonIndicator+1, startRawtime.length()));
+        this.endHour=Integer.parseInt(endRawtime.substring(1, eColonIndicator));
+        this.endMin=Integer.parseInt(endRawtime.substring(eColonIndicator+1, endRawtime.length()));
+    }
+
     public WeekViewEvent toWeekViewEvent(int newYear, int newMonth){
         Calendar startTime = Calendar.getInstance();
         startTime.set(Calendar.YEAR, newYear);
