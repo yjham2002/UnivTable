@@ -19,6 +19,12 @@ public class ClassInfo {
 
     public ClassInfo(){}
 
+    public ClassInfo(String title, String location, String rawtime) {
+        this.title = title;
+        this.location = location;
+        this.rawtime = rawtime;
+    }
+
     public ClassInfo(String title, String location, String rawtime, int weekDay, int startHour, int startMin, int endHour, int endMin) {
         this.title = title;
         this.location = location;

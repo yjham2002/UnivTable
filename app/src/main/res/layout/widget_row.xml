@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="@dimen/def_widget_left"
+        android:layout_gravity="center"
+        android:src="@drawable/clock_icon" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/week_padding"
+            android:text="과목명"
+            android:id="@+id/subject"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/default_text_large"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:text="강의실 및 강의실 번호 정보"
+            android:id="@+id/location"
+            android:textColor="@color/monsoon"
+            android:textSize="@dimen/default_text"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="00:00 ~ 00:00"
+            android:id="@+id/rawtime"
+            android:textColor="@color/monsoon"
+            android:textSize="@dimen/default_text"
+            />
+    </LinearLayout>
+
+</LinearLayout>

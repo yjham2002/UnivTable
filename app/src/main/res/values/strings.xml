@@ -15,4 +15,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="appwidget_text">유니테이블 시간표</string>
+    <string name="add_widget">위젯을 추가합니다</string>
 </resources>

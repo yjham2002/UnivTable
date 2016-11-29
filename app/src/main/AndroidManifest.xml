@@ -54,7 +54,22 @@
         <activity
             android:name=".ChatActivity"
             android:theme="@style/SimpleBlack" />
-        <activity android:name=".ChatListActivity"></activity>
+        <activity android:name=".ChatListActivity" />
+
+        <receiver android:name=".AppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="UPDATE_BUTTON_UNIVTABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_info" />
+        </receiver>
+        <service
+            android:name=".WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>

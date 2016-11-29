@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,7 +26,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import crawl.Crawler;
 import crawl.DonggukCrawler;
@@ -32,6 +36,8 @@ import crawl.KookminCrawler;
 import crawl.SogangCrawler;
 import util.Communicator;
 import util.URL;
+import weekview.WeekView;
+import weekview.WeekViewEvent;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -211,6 +217,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void initView(){
+
         _login = (Button)findViewById(R.id.bt_signin);
         _id = (EditText)findViewById(R.id.idp);
         _pw = (EditText)findViewById(R.id.pwp);

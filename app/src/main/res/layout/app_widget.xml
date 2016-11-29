@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@+id/words"
+            android:layout_alignTop="@+id/words"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/default_margin"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView2"
+                android:src="@drawable/logo"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="오늘의 시간표"
+                android:id="@+id/widget_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_text_mid"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/week_padding" />
+
+        </LinearLayout>
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/imageButtonSync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="업데이트"
+            android:padding="10dp"
+            android:layout_gravity="right" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/def_widget_left_line"
+            android:background="@color/monsoon"/>
+        <ListView
+            android:id="@+id/words"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="0dp"
+            android:divider="@color/transparent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="일정이 없어요 :)"
+            android:id="@+id/emptyview"
+            android:layout_gravity="center"
+            android:textColor="@color/jet"
+            android:textSize="@dimen/default_text_large"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@color/white" />
+
+    </FrameLayout>
+
+</LinearLayout>
