@@ -126,7 +126,7 @@
             <TextView
                 android:text="불러오는 중..."
                 android:id="@+id/detail_content"
-                android:textSize="12dp"
+                android:textSize="15dp"
                 android:textColor="@color/monsoon"
                 android:layout_width="wrap_content"
                 android:layout_margin="10dp"

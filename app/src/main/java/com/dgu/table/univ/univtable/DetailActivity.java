@@ -1,10 +1,16 @@
 package com.dgu.table.univ.univtable;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,15 +20,28 @@ import android.widget.Toast;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import crawl.Crawler;
+import util.Communicator;
 import util.TimeCalculator;
+import util.URL;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private ProgressDialog progressDialog;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
 
     private int articleNumber = -1;
+
+    private RecyclerView mRecyclerView;
+    private CommentAdapter commentAdapter;
 
     private Button _remove;
     private Button _exit;
@@ -42,8 +61,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v){
         switch (v.getId()){
             case R.id.detail_submit:
+                onSend(_comment.getText().toString());
                 break;
             case R.id.detail_remove:
+                onRemove();
                 break;
             case R.id.detail_exit:
                 finish();
@@ -55,6 +76,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void init(){
         pref = getSharedPreferences("Univtable", MODE_PRIVATE);
         prefEditor = pref.edit();
+
+        mRecyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        commentAdapter = new CommentAdapter(this, R.layout.listview_comment);
+        mRecyclerView.setAdapter(commentAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         _favicon = (ImageView)findViewById(R.id.detail_favicon);
         _remove = (Button)findViewById(R.id.detail_remove);
@@ -104,11 +131,68 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_detail);
 
         init();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
         loadComment();
     }
 
     public void loadComment(){
+        progressDialog = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("댓글 목록을 불러오는 중...");
+        progressDialog.show();
 
+        commentAdapter.mListData.clear();
+        Communicator.getHttp(URL.MAIN + URL.REST_BOARD_COMMENT + articleNumber, new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                String jsonString = msg.getData().getString("jsonString");
+                try {
+                    JSONArray json_arr = new JSONArray(jsonString);
+                    for(int i = 0; i < json_arr.length(); i++){
+                        JSONObject json_list = json_arr.getJSONObject(i);
+                        commentAdapter.addItem(new CommentData(json_list.getInt("id"), json_list.getInt("mid"), json_list.getInt("aid"), json_list.getString("content"), json_list.getString("date"), json_list.getString("userName")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }finally {
+                    progressDialog.dismiss();
+                    commentAdapter.dataChange();
+                }
+
+            }
+        });
+    }
+
+    public void onSend(String msg){
+        if(msg.length() < 5){
+            Toast.makeText(getApplicationContext(), "5자 이상 입력하세요", Toast.LENGTH_LONG).show();
+            return;
+        }
+        HashMap<String, String> dataSet = new HashMap<>();
+        dataSet.put("mid", Integer.toString(pref.getInt("mid", -1)));
+        dataSet.put("aid", Integer.toString(articleNumber));
+        dataSet.put("content", msg);
+        new Communicator().postHttp(URL.MAIN + URL.REST_COMMENT_NEW, dataSet, new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                _comment.setText("");
+                loadComment();
+            }
+        });
+    }
+
+    public void onRemove(){
+        new Communicator().postHttp(URL.MAIN + URL.REST_REMOVE_BOARD + articleNumber, new HashMap<String, String>(), new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                Toast.makeText(getApplicationContext(), "삭제되었습니다", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
     }
 
 }
