@@ -1,14 +1,23 @@
 package com.dgu.table.univ.univtable;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -38,6 +47,10 @@ import crawl.SogangCrawler;
 import util.*;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+
+    public static AlarmManager mAlarmMgr;
+    public static final long cycle = 1;
+    public static final int MY_PERMISSION_ACCESS_COURSE_LOCATION = 11;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
@@ -69,6 +82,31 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 onLogout();
                 break;
         }
+    }
+
+    public static boolean isPermissionGranted(Context context){
+        return !( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+    }
+
+    @TargetApi(23)
+    private void requestPermit(Context context) {
+        if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_ACCESS_COURSE_LOCATION);
+        }
+    }
+
+    public void onAlarmStart() {
+        mAlarmMgr = (AlarmManager)getSystemService(ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        long cycleTime = 1000 * 60 * cycle;
+        long startTime = SystemClock.elapsedRealtime() + cycleTime;
+        Log.e("UNIVTABLE_ALARM_SET", "Set startTime : " + startTime + ", cycleTime : " + cycleTime);
+        mAlarmMgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, startTime, cycleTime, pIntent);
     }
 
     public void onLogout(){
@@ -108,6 +146,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
         toolbar = mViewPager.getToolbar();
+
+        requestPermit(this);
 
     }
 
@@ -252,6 +292,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onResume();
         mDrawerToggle.syncState();
         regToken();
+        onAlarmStart();
     }
 
     @Override

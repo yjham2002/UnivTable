@@ -37,6 +37,7 @@ public class AttendListAdapter extends RecyclerView.Adapter<AttendListAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, final int position) {
         AttendInfo mData = mListData.get(position);
         holder._subject.setText(mData.subject);
+        holder._date.setText(mData.rawDate);
         holder.cardview.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,11 +52,12 @@ public class AttendListAdapter extends RecyclerView.Adapter<AttendListAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView _subject;
+        public TextView _subject, _date;
         public CardView cardview;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            _date = (TextView)itemView.findViewById(R.id.date);
             _subject = (TextView)itemView.findViewById(R.id.subject);
             cardview = (CardView)itemView.findViewById(R.id.cardview);
         }

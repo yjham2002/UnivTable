@@ -6,4 +6,8 @@ public class AttendInfo {
 
     public AttendInfo(){}
 
+    public AttendInfo(String subject, String rawDate) {
+        this.subject = subject;
+        this.rawDate = rawDate;
+    }
 }
