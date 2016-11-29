@@ -41,19 +41,16 @@ public class ClassInfo {
     }
 
     public void categorizeKookminClass(String rawdata){
-        int titleIndex;
-        int locationIndex;
-        titleIndex=rawdata.indexOf("(");
-        locationIndex=rawdata.indexOf(")");
-        this.title=rawdata.substring(0, titleIndex-1).replaceAll(" ", "");
-        this.location=rawdata.substring(locationIndex+1, rawdata.length());
+        int titleIndex = rawdata.indexOf("(");
+        int locationIndex = rawdata.indexOf(")");
+        this.title=rawdata.substring(0, titleIndex - 1).replaceAll(" ", "");
+        this.location=rawdata.substring(locationIndex + 1, rawdata.length());
     }
 
     public void insertTime(String startRawtime, String endRawtime){
-        int sColonIndicator=-1;
-        int eColonIndicator=-1;
-        sColonIndicator=startRawtime.indexOf(":");
-        eColonIndicator=endRawtime.indexOf(":");
+        int sColonIndicator=startRawtime.indexOf(":");
+        int eColonIndicator=endRawtime.indexOf(":");
+
         this.startHour=Integer.parseInt(startRawtime.substring(0, sColonIndicator));
         this.startMin=Integer.parseInt(startRawtime.substring(sColonIndicator+1, startRawtime.length()));
         this.endHour=Integer.parseInt(endRawtime.substring(1, eColonIndicator));
