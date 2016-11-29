@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
 
+    private Button _exit;
+
     private ProgressBar pbar;
 
     private WeekView mWeekView;
@@ -41,6 +44,9 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
     @Override
     public void onClick(View v){
         switch(v.getId()){
+            case R.id.bt_exit:
+                finish();
+                break;
             default: break;
         }
     }
@@ -94,6 +100,9 @@ public class TimetableActivity extends AppCompatActivity implements WeekView.Eve
         prefEditor = pref.edit();
 
         pbar = (ProgressBar)findViewById(R.id.pbar);
+
+        _exit = (Button)findViewById(R.id.bt_exit);
+        _exit.setOnClickListener(this);
 
         mWeekView = (WeekView)findViewById(R.id.weekView);
         mWeekView.setOnEventClickListener(this);

@@ -52,7 +52,7 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
 
         final ArticleItem mData = mListData.get(position);
         String tempContent = "";
-        if(mData.content.length() > 20) tempContent = mData.content.substring(0, 23) + "...";
+        if(mData.content.length() > 15) tempContent = mData.content.substring(0, 14) + "...";
         else tempContent = mData.content;
         holder._name.setText(mData.name);
         holder._content.setText(tempContent);
@@ -86,7 +86,13 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mContext, DetailActivity.class);
-                i.putExtra("aid", mData.id);
+                i.putExtra("id", mData.id);
+                i.putExtra("mid", mData.mid);
+                i.putExtra("content", mData.content);
+                i.putExtra("ucode", mData.ucode);
+                i.putExtra("comment", mData.comment);
+                i.putExtra("name", mData.name);
+                i.putExtra("date", TimeCalculator.formatTimeString(mData.date));
                 mContext.startActivity(i);
             }
         });
