@@ -235,7 +235,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)){
             finish();
-            overridePendingTransition(R.anim.push_in_r, R.anim.push_out_r);
         }
         return super.onKeyDown(keyCode, event);
     }

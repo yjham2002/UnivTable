@@ -13,7 +13,15 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import util.LatLng;
+
 public abstract class Crawler {
+
+    public static final LatLng GEO_DONGGUK_SEOUL = new LatLng(37.557715, 127.000786);
+    public static final LatLng GEO_DONGGUK_ILSAN = new LatLng(37.677364, 126.806572);
+    public static final LatLng GEO_DONGGUK_GYEONGJU = new LatLng(35.862645, 129.194656);
+    public static final LatLng GEO_DONGGUK_KOOKMIN = new LatLng(37.610886, 126.997579);
+    public static final LatLng GEO_DONGGUK_SOGANG = new LatLng(37.551336, 126.941182);
 
     public static final String GEO_SEOUL = "서울";
     public static final String GEO_ILSAN = "일산";

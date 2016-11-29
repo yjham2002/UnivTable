@@ -2,12 +2,12 @@ package util;
 
 import java.text.DecimalFormat;
 
+import crawl.Crawler;
+
 public class MapUtils {
 
-    public static final double dguLat = 37.557715, dguLon = 127.000786;
-
-    public static double distance(double lat, double lng){
-        return distance(dguLat, dguLon, lat, lng);
+    public static double distance(LatLng latLng, double lat, double lng){
+        return distance(latLng.latitude, latLng.longitude, lat, lng);
     }
 
     public static double distance(double lat1, double lon1, double lat2, double lon2) {

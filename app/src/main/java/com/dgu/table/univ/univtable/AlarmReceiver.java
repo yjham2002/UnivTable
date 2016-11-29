@@ -18,10 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import crawl.Crawler;
 import util.GPSTracker;
+import util.LatLng;
 import util.MapUtils;
 
 public class AlarmReceiver extends BroadcastReceiver{
+
+    private SharedPreferences pref;
+    private SharedPreferences.Editor prefEditor;
 
     private SharedPreferences prefSet;
 
@@ -127,11 +132,34 @@ public class AlarmReceiver extends BroadcastReceiver{
     }
 
     public void checkAttendance(Context context){
+        pref = context.getSharedPreferences("Univtable", context.MODE_PRIVATE);
+        prefEditor = pref.edit();
         createDatabase();
         createTable();
         if(Looper.myLooper()==null) Looper.prepare();
         GPSTracker loc = new GPSTracker(context);
-        if(MapUtils.distance(loc.getLatitude(), loc.getLongitude()) > THR && isClasstime()){
+        LatLng latLng = null;
+        switch (pref.getInt("ucode", -1)){
+            case Crawler.UCODE_DONGGUK:
+                latLng = Crawler.GEO_DONGGUK_SEOUL;
+                break;
+            case Crawler.UCODE_DONGGUK_GY:
+                latLng = Crawler.GEO_DONGGUK_GYEONGJU;
+                break;
+            case Crawler.UCODE_DONGGUK_IL:
+                latLng = Crawler.GEO_DONGGUK_ILSAN;
+                break;
+            case Crawler.UCODE_KOOKMIN:
+                latLng = Crawler.GEO_DONGGUK_KOOKMIN;
+                break;
+            case Crawler.UCODE_SOGANG:
+                latLng = Crawler.GEO_DONGGUK_SOGANG;
+                break;
+            default:
+                latLng = Crawler.GEO_DONGGUK_SEOUL;
+                break;
+        }
+        if(MapUtils.distance(latLng, loc.getLatitude(), loc.getLongitude()) > THR && isClasstime()){
             insertAbsent();
         }
     }
@@ -155,4 +183,3 @@ public class AlarmReceiver extends BroadcastReceiver{
         if(MainActivity.isPermissionGranted(context)) checkAttendance(context);
     }
 }
-

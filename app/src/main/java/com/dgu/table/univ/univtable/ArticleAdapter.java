@@ -2,6 +2,7 @@ package com.dgu.table.univ.univtable;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,9 @@ import util.TimeCalculator;
  */
 public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHolder> {
 
+    private SharedPreferences pref;
+    private SharedPreferences.Editor prefEditor;
+
     public static final int HEADER = 3, DEFAULT = 0;
     public Context mContext = null;
     public List<ArticleItem> mListData = new ArrayList<>();
@@ -43,6 +47,9 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        pref = mContext.getSharedPreferences("Univtable", mContext.MODE_PRIVATE);
+        prefEditor = pref.edit();
+
         final ArticleItem mData = mListData.get(position);
         String tempContent = "";
         if(mData.content.length() > 20) tempContent = mData.content.substring(0, 23) + "...";
@@ -71,14 +78,16 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ViewHol
             public void onClick(View v){
                 Intent i = new Intent(mContext, ChatActivity.class);
                 i.putExtra("partner", mData.mid);
-                mContext.startActivity(i);
+                if(pref.getInt("mid", -1) != mData.mid) mContext.startActivity(i);
             }
         });
 
         holder.cardview.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //final AssignInfo mData = staticInfo.mAdapter.mListData.get(position);
+                Intent i = new Intent(mContext, DetailActivity.class);
+                i.putExtra("aid", mData.id);
+                mContext.startActivity(i);
             }
         });
     }
