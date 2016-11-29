@@ -4,7 +4,7 @@
     <PreferenceCategory android:title="알림" >
         <SwitchPreference
             android:defaultValue="true"
-            android:key="notification_push"
+            android:key="notification_push_univ"
             android:summary="알림을 사용합니다"
             android:switchTextOff="OFF"
             android:switchTextOn="ON"
@@ -12,8 +12,8 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:dependency="notification_push"
-            android:key="keyword_push"
+            android:dependency="notification_push_univ"
+            android:key="keyword_push_univ"
             android:summary="자동 출결 정보 알림을 사용합니다"
             android:title="자동 출결 체크 알림" />
 

@@ -55,8 +55,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
 
-    private TextView _id, _name, _notice;
-    private Button _more, _time, _chat, _logout;
+    private TextView _id, _name;
+    private Button _time, _chat, _logout;
     private ImageView _setting, _favicon, _bg;
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
@@ -69,13 +69,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.drawer_setting:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case R.id.drawer_notice:
-                startActivity(new Intent(this, NoticeActivity.class));
-                break;
             case R.id.drawer_timetable:
                 startActivity(new Intent(this, TimetableActivity.class));
                 break;
             case R.id.drawer_chat:
+                mDrawer.closeDrawers();
                 startActivity(new Intent(this, ChatListActivity.class));
                 break;
             case R.id.drawer_logout:
@@ -126,15 +124,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         _id = (TextView)findViewById(R.id.sID);
         _name = (TextView)findViewById(R.id.sName);
-        _notice = (TextView)findViewById(R.id.notice_text);
 
         _id.setText(pref.getString("id", "Load Failed"));
         _name.setText(pref.getString("name", "Load Failed"));
 
         _setting = (ImageView)findViewById(R.id.drawer_setting);
         _setting.setOnClickListener(this);
-        _more = (Button)findViewById(R.id.drawer_notice);
-        _more.setOnClickListener(this);
         _time = (Button)findViewById(R.id.drawer_timetable);
         _time.setOnClickListener(this);
         _chat = (Button)findViewById(R.id.drawer_chat);

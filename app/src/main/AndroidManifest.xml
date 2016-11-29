@@ -47,14 +47,13 @@
         <activity
             android:name=".WriteActivity"
             android:theme="@style/SimpleBlack" />
-        <activity
-            android:name=".NoticeActivity"
-            android:theme="@style/SimpleBlack" />
         <activity android:name=".PrevActivity" />
         <activity
             android:name=".ChatActivity"
             android:theme="@style/SimpleBlack" />
-        <activity android:name=".ChatListActivity" />
+        <activity
+            android:name=".ChatListActivity"
+            android:theme="@style/Theme.Transparent" />
 
         <receiver android:name=".AppWidget">
             <intent-filter>
@@ -66,11 +65,19 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_info" />
         </receiver>
+
         <service
             android:name=".WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-        <receiver android:name=".AlarmReceiver" android:process=":remote"/>
 
+        <receiver
+            android:name=".AlarmReceiver"
+            android:process=":remote" />
+
+        <activity android:name=".DetailActivity"
+            android:theme="@style/SimpleBlack">
+
+        </activity>
     </application>
 
 </manifest>

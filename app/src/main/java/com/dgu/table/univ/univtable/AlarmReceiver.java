@@ -6,10 +6,12 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +22,8 @@ import util.GPSTracker;
 import util.MapUtils;
 
 public class AlarmReceiver extends BroadcastReceiver{
+
+    private SharedPreferences prefSet;
 
     public static final double THR = 1000.0;
     private GPSTracker mGPS;
@@ -133,6 +137,8 @@ public class AlarmReceiver extends BroadcastReceiver{
     }
 
     public void notification(String title, String msg, Context context){
+        prefSet = PreferenceManager.getDefaultSharedPreferences(context);
+        if(!prefSet.getBoolean("keyword_push_univ", true)) return;
         NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, IntroActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder builder = new Notification.Builder(context);

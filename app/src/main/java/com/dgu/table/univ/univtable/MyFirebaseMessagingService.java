@@ -4,9 +4,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -17,6 +19,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    private SharedPreferences prefSet;
 
     private static String batStatus = "Unknown";
 
@@ -86,6 +90,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String messageBody) {
+        prefSet = PreferenceManager.getDefaultSharedPreferences(this);
+        if(!prefSet.getBoolean("notification_push_univ", true)) return;
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,

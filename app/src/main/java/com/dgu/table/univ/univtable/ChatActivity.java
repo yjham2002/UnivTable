@@ -1,5 +1,6 @@
 package com.dgu.table.univ.univtable;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -185,6 +186,11 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     public void onResume() {
         super.onResume();
         isRun = true;
+        send.setEnabled(false);
+        final ProgressDialog pdial = new ProgressDialog(this, R.style.AppTheme_Dark_Dialog);
+        pdial.setMessage("상대방 정보를 불러오는 중...");
+        pdial.setCancelable(false);
+        pdial.show();
         Communicator.getHttp(URL.MAIN + URL.REST_USER_ONE + partnerKey, new Handler(){
             @Override
             public void handleMessage(Message msg){
@@ -194,8 +200,12 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     JSONObject json_list = json_arr.getJSONObject(0);
                     Log.e("JSON", msg.getData().getString("jsonString"));
                     title.setText(json_list.getString("Name").toString());
+                    send.setEnabled(true);
                 }catch (JSONException e){
+                    send.setEnabled(false);
                     e.printStackTrace();
+                }finally {
+                    pdial.dismiss();
                 }
             }
         });
