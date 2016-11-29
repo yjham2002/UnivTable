@@ -43,6 +43,10 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void upload(final int mid, String msg, final int flag){
+        if(msg.length() < 5){
+            Toast.makeText(getApplicationContext(), "5자 이상 입력하세요", Toast.LENGTH_LONG).show();
+            return;
+        }
         HashMap<String, String> data = new HashMap<>();
         data.put("mid", Integer.toString(mid));
         data.put("content", msg);

@@ -7,11 +7,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.os.Build;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -26,13 +29,12 @@ import util.MapUtils;
 public class AlarmReceiver extends BroadcastReceiver{
 
     private SharedPreferences pref;
-    private SharedPreferences.Editor prefEditor;
-
     private SharedPreferences prefSet;
 
-    public static final double THR = 1000.0;
+    public static final double THR = 500.0;
     private GPSTracker mGPS;
     private SQLiteDatabase database;
+
     private String dbName = "UNIVTABLE_DB";
     private String createTable =
             "create table if not exists CLASSES(" +
@@ -46,6 +48,7 @@ public class AlarmReceiver extends BroadcastReceiver{
                     "`id` integer primary key autoincrement, " +
                     "`subject` text, " +
                     "`date` text);";
+
     private Context context = null;
 
     private SimpleDateFormat inputParser = new SimpleDateFormat("HH:mm");
@@ -92,7 +95,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         Cursor result = database.rawQuery(sql, null);
         result.moveToFirst();
         while(!result.isAfterLast()){
-            if(compareDates(result.getString(2).substring(0, 5).trim(), result.getString(2).substring(8, 13).trim())){
+            if(compareDates(result.getString(2).substring(0, 2).trim() + ":" + result.getString(2).substring(4, 6).trim(), result.getString(2).substring(10, 12).trim() + ":" + result.getString(2).substring(14, 16).trim())){
                 Log.e("It is classtime", "##########################");
                 currentClass = result.getString(0);
                 currentTime = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DAY_OF_MONTH);
@@ -106,6 +109,7 @@ public class AlarmReceiver extends BroadcastReceiver{
     }
 
     public boolean isUnique(String subject, String date){
+        Log.e("DGU_ALARM", "IS_UNIQUE");
         SQLiteStatement s = database.compileStatement( "select count(*) from ATTEND where `subject`='" + subject + "' and `date`='" + date + "'; " );
         long count = s.simpleQueryForLong();
         if(count <= 0) return true;
@@ -113,6 +117,7 @@ public class AlarmReceiver extends BroadcastReceiver{
     }
 
     public void insertAbsent(){
+        Log.e("DGU_ALARM", "INSERT_ABSENT");
         if(!isUnique(currentClass, currentTime)) {
             Log.e("Unique Fail", currentClass + "/" + currentTime);
             return;
@@ -132,8 +137,8 @@ public class AlarmReceiver extends BroadcastReceiver{
     }
 
     public void checkAttendance(Context context){
+        Log.e("DGU_ALARM", "CHECK_ATTENDANCE");
         pref = context.getSharedPreferences("Univtable", context.MODE_PRIVATE);
-        prefEditor = pref.edit();
         createDatabase();
         createTable();
         if(Looper.myLooper()==null) Looper.prepare();
@@ -159,12 +164,14 @@ public class AlarmReceiver extends BroadcastReceiver{
                 latLng = Crawler.GEO_DONGGUK_SEOUL;
                 break;
         }
+        Log.e("DGU_ALARM", MapUtils.distance(latLng, loc.getLatitude(), loc.getLongitude()) + " Meters Long");
         if(MapUtils.distance(latLng, loc.getLatitude(), loc.getLongitude()) > THR && isClasstime()){
             insertAbsent();
         }
     }
 
     public void notification(String title, String msg, Context context){
+        Log.e("DGU_ALARM", "NOTIFICATION");
         prefSet = PreferenceManager.getDefaultSharedPreferences(context);
         if(!prefSet.getBoolean("keyword_push_univ", true)) return;
         NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -176,10 +183,17 @@ public class AlarmReceiver extends BroadcastReceiver{
         notificationmanager.notify(1, builder.build());
     }
 
+    public boolean isPermissionGranted(Context context){
+        Log.e("DGU_ALARM", "PERMISSION CHECK");
+        return !( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.e("DGU_ALARM", "SAVED");
         this.context = context;
-        if(MainActivity.isPermissionGranted(context)) checkAttendance(context);
+        if(isPermissionGranted(context)) checkAttendance(context);
     }
 }

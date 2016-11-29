@@ -53,6 +53,7 @@ public class fm_1 extends Fragment implements View.OnClickListener{
                     "`rawtime` text, " +
                     "`wday` integer);";
 
+
     private Crawler Tcrawler;
 
     private ProgressBar pbar;
@@ -156,7 +157,6 @@ public class fm_1 extends Fragment implements View.OnClickListener{
         });
 
         loadList();
-
     }
 
     public void dataChanged(){

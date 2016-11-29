@@ -82,12 +82,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
-    public static boolean isPermissionGranted(Context context){
-        return !( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
-    }
-
     @TargetApi(23)
     private void requestPermit(Context context) {
         if (Build.VERSION.SDK_INT >= 23 &&

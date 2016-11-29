@@ -50,6 +50,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private SharedPreferences pref;
     private SharedPreferences.Editor prefEditor;
 
+    private SQLiteDatabase database;
+    private String dbName = "UNIVTABLE_DB";
+    private String dropTable =
+            "drop table if exists ATTEND;";
+
     private Spinner _spinner;
     private Button _login;
     private EditText _id, _pw;
@@ -61,6 +66,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signIn(_id.getText().toString(), _pw.getText().toString());
                 break;
             default: break;
+        }
+    }
+
+    public void createDatabase(){
+        database = openOrCreateDatabase(dbName, MODE_PRIVATE, null);
+    }
+
+    public void dropTable(){
+        try{
+            database.execSQL(dropTable);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -166,8 +183,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 JSONArray json_arr = new JSONArray(jsonString);
                                 JSONObject json_list = json_arr.getJSONObject(0);
                                 Log.e("JSON", msg.getData().getString("jsonString"));
+                                if(pref.getInt("mid", -1) != json_list.getInt("id")) dropTable();
                                 prefEditor.putInt("mid", json_list.getInt("id"));
                                 prefEditor.commit();
+
                             }catch (JSONException e){
                                 prefEditor.putBoolean("auto", false);
                                 prefEditor.putString("id", "#");
@@ -252,6 +271,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         pref = getSharedPreferences("Univtable", MODE_PRIVATE);
         prefEditor = pref.edit();
+
+        createDatabase();
 
         initView();
 
