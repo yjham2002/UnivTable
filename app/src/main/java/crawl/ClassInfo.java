@@ -40,17 +40,20 @@ public class ClassInfo {
         return new ClassInfo(title, location, rawtime, weekDay, startHour, startMin, endHour, endMin);
     }
 
-    public void categorizeKookminClass(String rawdata){
-        int titleIndex = rawdata.indexOf("(");
-        int locationIndex = rawdata.indexOf(")");
-        this.title=rawdata.substring(0, titleIndex - 1).replaceAll(" ", "");
-        this.location=rawdata.substring(locationIndex + 1, rawdata.length());
+    public void categorizeKookminClass(String rawdata){     //국민대 수업정보 문자열 분류
+        int titleIndex;
+        int locationIndex;
+        titleIndex=rawdata.indexOf("(");
+        locationIndex=rawdata.indexOf(")");
+        this.title=rawdata.substring(0, titleIndex-1).replaceAll(" ", "");
+        this.location=rawdata.substring(locationIndex+1, rawdata.length());
     }
 
-    public void insertTime(String startRawtime, String endRawtime){
-        int sColonIndicator=startRawtime.indexOf(":");
-        int eColonIndicator=endRawtime.indexOf(":");
-
+    public void insertTime(String startRawtime, String endRawtime){ //rawtime 받아서 categorize
+        int sColonIndicator=-1;
+        int eColonIndicator=-1;
+        sColonIndicator=startRawtime.indexOf(":");
+        eColonIndicator=endRawtime.indexOf(":");
         this.startHour=Integer.parseInt(startRawtime.substring(0, sColonIndicator));
         this.startMin=Integer.parseInt(startRawtime.substring(sColonIndicator+1, startRawtime.length()));
         this.endHour=Integer.parseInt(endRawtime.substring(1, eColonIndicator));
