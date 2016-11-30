@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +53,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView _date;
     private EditText _comment;
 
+    private int mToken = -1;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
@@ -71,6 +74,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             default: break;
         }
+    }
+
+    public void sendPush(String title, String message){
+        if(mToken == -1) return;
+        HashMap<String, String> data = new HashMap<>();
+        data.put("title", title);
+        data.put("message", message);
+        Log.e("FCM Sent", util.URL.MAIN + util.URL.REST_FCM_ONE + mToken);
+        new Communicator().postHttp(util.URL.MAIN + util.URL.REST_FCM_ONE + mToken, data, new Handler());
     }
 
     public void init(){
@@ -104,6 +116,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             _name.setText(bundle.getString("name", "Unknown"));
             _date.setText(bundle.getString("date", "0000-00-00"));
             articleNumber = bundle.getInt("id", -1);
+            mToken = bundle.getInt("mid", -1);
             if(bundle.getInt("mid", -1) != pref.getInt("mid", -2)) _remove.setVisibility(View.GONE);
             switch (bundle.getInt("ucode", -1)){
                 case -1:
@@ -181,6 +194,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             public void handleMessage(Message msg){
                 _comment.setText("");
                 loadComment();
+                sendPush(getResources().getString(R.string.app_name), pref.getString("name", "#") + "님이 댓글을 남겼습니다");
             }
         });
     }
